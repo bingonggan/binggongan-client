@@ -1,0 +1,4 @@
+.prettierrc
+.husky
+node_modules
+.Ds_Store
