@@ -1,9 +1,11 @@
-import GlobalStyle from "../../assets/style/GlobalStyle";
+import GlobalStyle from "../../styles/GlobalStyle";
+import HeaderComponent from "../Header";
 
 function App() {
   return (
     <>
       <GlobalStyle />
+      <HeaderComponent />
       <h1>test</h1>
     </>
   );
