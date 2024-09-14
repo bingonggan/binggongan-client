@@ -1,12 +1,13 @@
-import GlobalStyle from "../../styles/GlobalStyle";
-import HeaderComponent from "../Header";
+import GlobalStyle from "../../GlobalStyle";
+import Header from "../Header";
+import Main from "../Main";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <HeaderComponent />
-      <h1>test</h1>
+      <Header />
+      <Main />
     </>
   );
 }

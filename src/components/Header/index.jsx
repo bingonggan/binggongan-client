@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Header = styled.header`
+const StyledHeader = styled.header`
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -10,8 +10,8 @@ const Header = styled.header`
   background-color: #f8f8f8;
 `;
 
-function HeaderComponent() {
-  return <Header>빈 공간</Header>;
+function Header() {
+  return <StyledHeader>빈 공간</StyledHeader>;
 }
 
-export default HeaderComponent;
+export default Header;
