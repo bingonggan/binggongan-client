@@ -11,7 +11,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Poor Story", system-ui;
     font-weight: 400;
-    font-style: normal;  }
+    font-style: normal;
+  }
 `;
 
 export default GlobalStyle;
