@@ -2,21 +2,20 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Plane } from "@react-three/drei";
 import styled from "styled-components";
 
-import BoxModel from "./BoxModel";
+import BoxItem from "./BoxItem";
 
-const StyledCanvasContainer = styled.div`
+const StyledMainScene = styled.div`
   height: 90vh;
   width: 100vw;
-  display: flex;
 `;
 
-function Main() {
+function MainScene() {
   return (
-    <StyledCanvasContainer>
+    <StyledMainScene>
       <Canvas camera={{ position: [2, 3, 2], fov: 100 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} />
-        <BoxModel position={[0, 0, 0]} />
+        <BoxItem position={[0, 0, 0]} />
         <Plane
           args={[300, 300]}
           position={[0, -1, 0]}
@@ -31,8 +30,8 @@ function Main() {
         </Plane>
         <OrbitControls />
       </Canvas>
-    </StyledCanvasContainer>
+    </StyledMainScene>
   );
 }
 
-export default Main;
+export default MainScene;

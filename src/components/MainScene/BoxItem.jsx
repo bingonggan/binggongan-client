@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 
-function BoxModel({ position }) {
-  const { scene } = useGLTF(import.meta.env.VITE_BOX_MODEL);
+function BoxItem({ position }) {
+  const { scene } = useGLTF(import.meta.env.VITE_BOX_ITEM);
 
   scene.traverse((child) => {
     if (child.isMesh) {
@@ -13,4 +13,4 @@ function BoxModel({ position }) {
   return <primitive object={scene} position={position} />;
 }
 
-export default BoxModel;
+export default BoxItem;

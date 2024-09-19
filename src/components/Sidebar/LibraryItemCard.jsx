@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { useItemState } from "../../store";
+
 const StyledLibraryItemCard = styled.div`
   min-height: 200px;
   margin: 10%;
@@ -28,17 +30,44 @@ const StyledItemName = styled.div`
 `;
 
 function LibraryItemCard({ item }) {
+  const {
+    setIsOpen,
+    setItemUrl,
+    setItemX,
+    setItemY,
+    setItemZ,
+    setInitItemX,
+    setInitItemY,
+    setInitItemZ,
+  } = useItemState();
+
   const itemName = Object.keys(item)[0];
-  const itemImageUrl = `${import.meta.env.VITE_MODEL_URL}/${itemName}.png`;
-  const replacedItemName = itemName.replaceAll("_", " ");
+  const itemImageUrl = `${import.meta.env.VITE_ITEM_URL}/${itemName}.png`;
+  const itemUrl = `${import.meta.env.VITE_ITEM_URL}/${itemName}.glb`;
+  const itemTitle = item[itemName].title;
+
+  const itemX = item[itemName].x;
+  const itemY = item[itemName].y;
+  const itemZ = item[itemName].z;
 
   return (
     <StyledLibraryItemCard>
-      <StyledItemImageBox>
+      <StyledItemImageBox
+        onClick={() => {
+          setIsOpen(true);
+          setItemUrl(itemUrl);
+          setItemX(itemX);
+          setItemY(itemY);
+          setItemZ(itemZ);
+          setInitItemX(itemX);
+          setInitItemY(itemY);
+          setInitItemZ(itemZ);
+        }}
+      >
         <ItemImage src={itemImageUrl} alt={itemName} />
       </StyledItemImageBox>
       <StyledItemName>
-        <h2>{replacedItemName}</h2>
+        <h2>{itemTitle}</h2>
       </StyledItemName>
     </StyledLibraryItemCard>
   );

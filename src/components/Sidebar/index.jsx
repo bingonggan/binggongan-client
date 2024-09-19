@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 
 import LibraryItemCard from "./LibraryItemCard";
-import { useItemList } from "../../store/store";
+import { useItemList } from "../../store";
 
 const StyledSidebar = styled.div`
   height: 90vh;
@@ -23,10 +23,12 @@ const Header = styled.div`
 
 function Sidebar() {
   const { itemList, setItemList } = useItemList();
+
   const itemListExists = itemList.length !== 0;
+
   useEffect(() => {
     async function fetchImageList() {
-      const response = await fetch(import.meta.env.VITE_MODEL_LIST);
+      const response = await fetch(import.meta.env.VITE_ITEM_LIST);
       const imageList = await response.json();
 
       setItemList(imageList.items);

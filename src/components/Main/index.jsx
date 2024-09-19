@@ -1,17 +1,24 @@
 import styled from "styled-components";
 
+import { useItemState } from "../../store";
 import MainScene from "../MainScene";
 import Sidebar from "../Sidebar";
+import ItemModal from "../ItemModal";
+import BottomBar from "../BottomBar";
 
 const StyledMain = styled.div`
   display: flex;
 `;
 
 function Main() {
+  const { isOpen } = useItemState();
+
   return (
     <StyledMain>
       <Sidebar />
       <MainScene />
+      {isOpen && <ItemModal />}
+      <BottomBar />
     </StyledMain>
   );
 }

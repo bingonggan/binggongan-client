@@ -12,9 +12,7 @@ const StyledHeader = styled.header`
 function Header() {
   return (
     <StyledHeader>
-      <h1>
-        포장하기를 누르면 상자 크기를 추천해주고 자동으로 포장해주는 사이트
-      </h1>
+      <h1>빈 공간</h1>
     </StyledHeader>
   );
 }
