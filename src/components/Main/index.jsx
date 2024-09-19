@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useItemState } from "../../store";
+import { useItemStateStore } from "../../store";
 import MainScene from "../MainScene";
 import Sidebar from "../Sidebar";
 import ItemModal from "../ItemModal";
@@ -11,7 +11,7 @@ const StyledMain = styled.div`
 `;
 
 function Main() {
-  const { isOpen } = useItemState();
+  const { isOpen } = useItemStateStore();
 
   return (
     <StyledMain>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 
 import LibraryItemCard from "./LibraryItemCard";
-import { useItemList } from "../../store";
+import { useItemListStore } from "../../store";
 
 const StyledSidebar = styled.div`
   height: 90vh;
@@ -22,7 +22,7 @@ const Header = styled.div`
 `;
 
 function Sidebar() {
-  const { itemList, setItemList } = useItemList();
+  const { itemList, setItemList } = useItemListStore();
 
   const itemListExists = itemList.length !== 0;
 

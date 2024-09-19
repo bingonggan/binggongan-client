@@ -1,6 +1,6 @@
 function RangeInput({ label, value, setValue, initValue }) {
-  const MIN = initValue / 2;
-  const MAX = initValue * 2;
+  const MIN = Math.floor(initValue / 2);
+  const MAX = Math.floor(initValue * 2);
 
   return (
     <>

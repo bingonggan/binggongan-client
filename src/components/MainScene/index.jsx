@@ -12,7 +12,7 @@ const StyledMainScene = styled.div`
 function MainScene() {
   return (
     <StyledMainScene>
-      <Canvas camera={{ position: [2, 3, 2], fov: 100 }}>
+      <Canvas camera={{ position: [7, 10, 0], fov: 100 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} />
         <BoxItem position={[0, 0, 0]} />

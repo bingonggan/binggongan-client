@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+const StyledButton = styled.div`
   position: absolute;
   top: ${(props) => props.top}%;
   left: ${(props) => props.left}%;

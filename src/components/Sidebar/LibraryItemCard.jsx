@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useItemState } from "../../store";
+import { useItemStateStore } from "../../store";
 
 const StyledLibraryItemCard = styled.div`
   min-height: 200px;
@@ -32,14 +32,16 @@ const StyledItemName = styled.div`
 function LibraryItemCard({ item }) {
   const {
     setIsOpen,
+    setItemTitle,
     setItemUrl,
+    setItemImageUrl,
     setItemX,
     setItemY,
     setItemZ,
     setInitItemX,
     setInitItemY,
     setInitItemZ,
-  } = useItemState();
+  } = useItemStateStore();
 
   const itemName = Object.keys(item)[0];
   const itemImageUrl = `${import.meta.env.VITE_ITEM_URL}/${itemName}.png`;
@@ -55,6 +57,7 @@ function LibraryItemCard({ item }) {
       <StyledItemImageBox
         onClick={() => {
           setIsOpen(true);
+          setItemTitle(itemTitle);
           setItemUrl(itemUrl);
           setItemX(itemX);
           setItemY(itemY);
@@ -62,6 +65,7 @@ function LibraryItemCard({ item }) {
           setInitItemX(itemX);
           setInitItemY(itemY);
           setInitItemZ(itemZ);
+          setItemImageUrl(itemImageUrl);
         }}
       >
         <ItemImage src={itemImageUrl} alt={itemName} />

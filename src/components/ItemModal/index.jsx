@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Button from "../common/Button";
 import Item from "../common/Item";
 import RangeInput from "../common/RangeInput";
-import { useItemState } from "../../store";
+import { useItemStateStore, useCustomizedItemListStore } from "../../store";
 
 const StyledItemModal = styled.div`
   position: fixed;
@@ -59,7 +59,9 @@ const InfoMessageBox = styled.div`
 
 function ItemModal() {
   const {
+    itemTitle,
     itemUrl,
+    itemImageUrl,
     initItemX,
     initItemY,
     initItemZ,
@@ -70,13 +72,28 @@ function ItemModal() {
     setItemY,
     setItemZ,
     setIsOpen,
-  } = useItemState();
+  } = useItemStateStore();
+
+  const addCustomizedItemList = useCustomizedItemListStore(
+    (state) => state.addCustomizedItemList,
+  );
 
   const comparisonItemUrl = import.meta.env.VITE_COMPARISON_ITEM_URL;
 
   const scaleX = itemX / initItemX;
   const scaleY = itemY / initItemY;
   const scaleZ = itemZ / initItemZ;
+
+  function registerItem() {
+    addCustomizedItemList({
+      itemTitle,
+      itemImageUrl,
+      itemX,
+      itemY,
+      itemZ,
+    });
+    setIsOpen(false);
+  }
 
   return (
     <>
@@ -132,7 +149,7 @@ function ItemModal() {
         <Button onClick={() => setIsOpen(false)} top={85} left={20}>
           취소
         </Button>
-        <Button onClick={() => setIsOpen(false)} top={85} left={70}>
+        <Button onClick={registerItem} top={85} left={70}>
           등록
         </Button>
       </StyledItemModal>

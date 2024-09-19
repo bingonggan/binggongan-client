@@ -1,37 +1,133 @@
 import styled from "styled-components";
 
-const StyledBottomBar = styled.div`
+import { useItemListIndexStore, useCustomizedItemListStore } from "../../store";
+
+const BottomBarContainer = styled.div`
   position: absolute;
+  flex-direction: column;
+  align-items: center;
   display: flex;
-  height: 10vh;
-  top: 85%;
+  height: 15vh;
+  top: 80%;
   left: 35%;
 `;
 
 const ContentBox = styled.div`
   display: flex;
+  height: 80%;
+`;
+
+const ItemBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   border-radius: 5px;
-  justify-align: center;
   border: 3px solid grey;
   width: 5vw;
   height: 100%;
 `;
 
+const ItemNavBox = styled.div`
+  display: flex;
+  height: 20%;
+  width: 100%;
+`;
+
+const ItemImageBox = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 80%;
+  width: 100%;
+`;
+
+const ItemIndexBox = styled.div`
+  width: 80%;
+`;
+
+const ItemDeleteImageBox = styled.div`
+  display: flex;
+  width: 20%;
+`;
+
+const ArrowBox = styled.div`
+  display: flex;
+  border-radius: 5px;
+  border: 3px solid grey;
+  width: 5vw;
+  height: 100%;
+`;
+
+const ButtonBox = styled.div`
+  height: 30%;
+  width: 15%;
+  border: 1px solid #d9d9d9;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  background-color: #999999;
+`;
+
 function BottomBar() {
+  const { increaseItemListIndex, decreaseItemListIndex, itemListIndex } =
+    useItemListIndexStore();
+  const { customizedItemList, deleteCustomizedItemList } =
+    useCustomizedItemListStore();
+
+  const contentList = new Array(5).fill(0);
+
+  function handleIncreaseIndex() {
+    if (itemListIndex < 10) {
+      increaseItemListIndex();
+    }
+  }
+
+  function handleDecreaseIndex() {
+    if (itemListIndex > 0) {
+      decreaseItemListIndex();
+    }
+  }
+
+  function handleDeleteItem(itemIndex) {
+    deleteCustomizedItemList(itemIndex);
+  }
+
+  function handlePacking() {
+    console.log(customizedItemList);
+  }
+
   return (
-    <StyledBottomBar>
+    <BottomBarContainer>
+      <ButtonBox onClick={handlePacking}>포장하기</ButtonBox>
       <ContentBox>
-        <img src="/left-arrow.png" alt="왼쪽 화살표" />
+        <ArrowBox onClick={handleDecreaseIndex}>
+          <img src="/left-arrow.png" alt="왼쪽 화살표" />
+        </ArrowBox>
+        {contentList.map((_, index) => {
+          const itemIndex = itemListIndex + index;
+          const itemImageUrl = customizedItemList[itemIndex]?.itemImageUrl;
+          const itemTitle = customizedItemList[itemIndex]?.itemTitle;
+          const itemNumber = itemListIndex + index + 1;
+
+          return (
+            <ItemBox key={index}>
+              <ItemNavBox>
+                <ItemIndexBox>{itemNumber}</ItemIndexBox>
+                <ItemDeleteImageBox onClick={() => handleDeleteItem(itemIndex)}>
+                  <img src="/delete.svg" alt="delete" />
+                </ItemDeleteImageBox>
+              </ItemNavBox>
+              <ItemImageBox>
+                {itemImageUrl && <img src={itemImageUrl} alt={itemTitle} />}
+              </ItemImageBox>
+            </ItemBox>
+          );
+        })}
+        <ArrowBox onClick={handleIncreaseIndex}>
+          <img src="/right-arrow.png" alt="오른쪽 화살표" />
+        </ArrowBox>
       </ContentBox>
-      <ContentBox />
-      <ContentBox />
-      <ContentBox />
-      <ContentBox />
-      <ContentBox />
-      <ContentBox>
-        <img src="/right-arrow.png" alt="오른쪽 화살표" />
-      </ContentBox>
-    </StyledBottomBar>
+    </BottomBarContainer>
   );
 }
 
