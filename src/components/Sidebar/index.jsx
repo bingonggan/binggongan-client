@@ -30,6 +30,7 @@ function Sidebar() {
     async function fetchImageList() {
       const response = await fetch(import.meta.env.VITE_ITEM_LIST);
       const imageList = await response.json();
+      console.log(imageList);
 
       setItemList(imageList.items);
     }

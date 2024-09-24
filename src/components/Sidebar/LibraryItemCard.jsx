@@ -13,6 +13,7 @@ const StyledItemImageBox = styled.div`
   width: 100%;
   background-color: black;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const ItemImage = styled.img`
@@ -32,15 +33,16 @@ const StyledItemName = styled.div`
 function LibraryItemCard({ item }) {
   const {
     setIsOpen,
+    setItemName,
     setItemTitle,
     setItemUrl,
     setItemImageUrl,
-    setItemX,
-    setItemY,
-    setItemZ,
-    setInitItemX,
-    setInitItemY,
-    setInitItemZ,
+    setItemW,
+    setItemH,
+    setItemD,
+    setInitItemW,
+    setInitItemH,
+    setInitItemD,
   } = useItemStateStore();
 
   const itemName = Object.keys(item)[0];
@@ -48,23 +50,24 @@ function LibraryItemCard({ item }) {
   const itemUrl = `${import.meta.env.VITE_ITEM_URL}/${itemName}.glb`;
   const itemTitle = item[itemName].title;
 
-  const itemX = item[itemName].x;
-  const itemY = item[itemName].y;
-  const itemZ = item[itemName].z;
+  const itemW = item[itemName].x;
+  const itemH = item[itemName].y;
+  const itemD = item[itemName].z;
 
   return (
     <StyledLibraryItemCard>
       <StyledItemImageBox
         onClick={() => {
           setIsOpen(true);
+          setItemName(itemName);
           setItemTitle(itemTitle);
           setItemUrl(itemUrl);
-          setItemX(itemX);
-          setItemY(itemY);
-          setItemZ(itemZ);
-          setInitItemX(itemX);
-          setInitItemY(itemY);
-          setInitItemZ(itemZ);
+          setItemW(itemW);
+          setItemH(itemH);
+          setItemD(itemD);
+          setInitItemW(itemW);
+          setInitItemH(itemH);
+          setInitItemD(itemD);
           setItemImageUrl(itemImageUrl);
         }}
       >

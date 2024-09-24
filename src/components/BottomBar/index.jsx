@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-import { useItemListIndexStore, useCustomizedItemListStore } from "../../store";
+import {
+  useItemListIndexStore,
+  useCustomizedItemListStore,
+  usePackedBoxAndItemListStore,
+} from "../../store";
 
 const BottomBarContainer = styled.div`
   position: absolute;
@@ -46,6 +50,7 @@ const ItemIndexBox = styled.div`
 
 const ItemDeleteImageBox = styled.div`
   display: flex;
+  cursor: pointer;
   width: 20%;
 `;
 
@@ -63,7 +68,7 @@ const ButtonBox = styled.div`
   border: 1px solid #d9d9d9;
   margin-bottom: 5px;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   cursor: pointer;
   background-color: #999999;
 `;
@@ -73,6 +78,8 @@ function BottomBar() {
     useItemListIndexStore();
   const { customizedItemList, deleteCustomizedItemList } =
     useCustomizedItemListStore();
+  const { setPackedBoxAndItemList, setIsPacked } =
+    usePackedBoxAndItemListStore();
 
   const contentList = new Array(5).fill(0);
 
@@ -92,8 +99,33 @@ function BottomBar() {
     deleteCustomizedItemList(itemIndex);
   }
 
-  function handlePacking() {
-    console.log(customizedItemList);
+  async function handlePacking() {
+    const items = customizedItemList.map((object) => {
+      return {
+        itemName: object.itemName,
+        itemScaleX: object.itemScaleX,
+        itemScaleY: object.itemScaleY,
+        itemScaleZ: object.itemScaleZ,
+        itemW: object.itemW,
+        itemH: object.itemH,
+        itemD: object.itemD,
+      };
+    });
+    const stringifyItems = JSON.stringify({ items });
+
+    const response = await fetch(import.meta.env.VITE_SERVER_ORIGIN, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: stringifyItems,
+    });
+    const jsonResponse = await response.json();
+    const packedBoxAndItemList = jsonResponse.result;
+    console.log(packedBoxAndItemList);
+
+    setPackedBoxAndItemList(packedBoxAndItemList);
+    setIsPacked(true);
   }
 
   return (

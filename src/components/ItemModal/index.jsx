@@ -59,18 +59,19 @@ const InfoMessageBox = styled.div`
 
 function ItemModal() {
   const {
+    itemName,
     itemTitle,
     itemUrl,
     itemImageUrl,
-    initItemX,
-    initItemY,
-    initItemZ,
-    itemX,
-    itemY,
-    itemZ,
-    setItemX,
-    setItemY,
-    setItemZ,
+    initItemW,
+    initItemH,
+    initItemD,
+    itemW,
+    itemH,
+    itemD,
+    setItemW,
+    setItemH,
+    setItemD,
     setIsOpen,
   } = useItemStateStore();
 
@@ -80,17 +81,21 @@ function ItemModal() {
 
   const comparisonItemUrl = import.meta.env.VITE_COMPARISON_ITEM_URL;
 
-  const scaleX = itemX / initItemX;
-  const scaleY = itemY / initItemY;
-  const scaleZ = itemZ / initItemZ;
+  const itemScaleX = itemW / initItemW;
+  const itemScaleY = itemH / initItemH;
+  const itemScaleZ = itemD / initItemD;
 
   function registerItem() {
     addCustomizedItemList({
+      itemName,
       itemTitle,
       itemImageUrl,
-      itemX,
-      itemY,
-      itemZ,
+      itemScaleX,
+      itemScaleY,
+      itemScaleZ,
+      itemW,
+      itemH,
+      itemD,
     });
     setIsOpen(false);
   }
@@ -102,21 +107,21 @@ function ItemModal() {
         <ControlBox>
           <RangeInput
             label={"길이(mm)"}
-            value={itemX}
-            initValue={initItemX}
-            setValue={setItemX}
-          />
-          <RangeInput
-            label={"너비(mm)"}
-            value={itemY}
-            initValue={initItemY}
-            setValue={setItemY}
+            value={itemW}
+            initValue={initItemW}
+            setValue={setItemW}
           />
           <RangeInput
             label={"높이(mm)"}
-            value={itemZ}
-            initValue={initItemZ}
-            setValue={setItemZ}
+            value={itemH}
+            initValue={initItemH}
+            setValue={setItemH}
+          />
+          <RangeInput
+            label={"너비(mm)"}
+            value={itemD}
+            initValue={initItemD}
+            setValue={setItemD}
           />
         </ControlBox>
         <ComparisonItemBox>
@@ -137,7 +142,7 @@ function ItemModal() {
               <Item
                 position={[0, 0, 0]}
                 itemUrl={itemUrl}
-                scale={[scaleX, scaleZ, scaleY]}
+                scale={[itemScaleX, itemScaleY, itemScaleZ]}
               />
             )}
             <OrbitControls enableZoom={false} />

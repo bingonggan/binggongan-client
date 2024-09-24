@@ -7,25 +7,27 @@ const useItemListStore = create((set) => ({
 
 const useItemStateStore = create((set) => ({
   isOpen: false,
+  itemName: "",
   itemTitle: "",
   itemUrl: null,
   itemImageUrl: null,
-  itemX: 0,
-  itemY: 0,
-  itemZ: 0,
-  initItemX: 0,
-  initItemY: 0,
-  initItemZ: 0,
+  itemW: 0,
+  itemH: 0,
+  itemD: 0,
+  initItemW: 0,
+  initItemH: 0,
+  initItemD: 0,
+  setItemName: (itemName) => set({ itemName }),
   setItemTitle: (itemTitle) => set({ itemTitle }),
   setIsOpen: (isOpen) => set({ isOpen }),
   setItemUrl: (itemUrl) => set({ itemUrl }),
   setItemImageUrl: (itemImageUrl) => set({ itemImageUrl }),
-  setItemX: (itemX) => set({ itemX }),
-  setItemY: (itemY) => set({ itemY }),
-  setItemZ: (itemZ) => set({ itemZ }),
-  setInitItemX: (initItemX) => set({ initItemX }),
-  setInitItemY: (initItemY) => set({ initItemY }),
-  setInitItemZ: (initItemZ) => set({ initItemZ }),
+  setItemW: (itemW) => set({ itemW: parseInt(itemW, 10) }),
+  setItemH: (itemH) => set({ itemH: parseInt(itemH, 10) }),
+  setItemD: (itemD) => set({ itemD: parseInt(itemD, 10) }),
+  setInitItemW: (initItemW) => set({ initItemW }),
+  setInitItemH: (initItemH) => set({ initItemH }),
+  setInitItemD: (initItemD) => set({ initItemD }),
 }));
 
 const useCustomizedItemListStore = create((set) => ({
@@ -51,9 +53,26 @@ const useItemListIndexStore = create((set) => ({
     set((state) => ({ itemListIndex: state.itemListIndex - 1 })),
 }));
 
+const usePackedBoxAndItemListStore = create((set) => ({
+  packedBoxAndItemList: [],
+  isPacked: false,
+  setPackedBoxAndItemList: (packedBoxAndItemList) =>
+    set({ packedBoxAndItemList }),
+  setIsPacked: (isPacked) => set({ isPacked }),
+}));
+
+const useModelStore = create((set) => ({
+  modelList: [],
+  setModelList: (model) =>
+    set((state) => ({ modelList: [...state.modelList, model] })),
+  initModelList: () => set({ modelList: [] }),
+}));
+
 export {
   useItemListStore,
   useItemStateStore,
   useCustomizedItemListStore,
   useItemListIndexStore,
+  usePackedBoxAndItemListStore,
+  useModelStore,
 };

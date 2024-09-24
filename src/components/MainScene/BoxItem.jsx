@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 
-function BoxItem({ position }) {
+function BoxItem({ position, scale = [1, 1, 1] }) {
   const { scene } = useGLTF(import.meta.env.VITE_BOX_ITEM);
 
   scene.traverse((child) => {
@@ -10,7 +10,7 @@ function BoxItem({ position }) {
     }
   });
 
-  return <primitive object={scene} position={position} />;
+  return <primitive object={scene} position={position} scale={scale} />;
 }
 
 export default BoxItem;

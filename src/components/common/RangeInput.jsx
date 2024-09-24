@@ -19,7 +19,6 @@ function RangeInput({ label, value, setValue, initValue }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           min={MIN}
-          max={MAX}
         />
       </div>
     </>
