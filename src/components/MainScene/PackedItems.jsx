@@ -25,7 +25,7 @@ function PackedItems() {
       case 0:
         return [0, 0, 0];
       case 1:
-        return [0, rotation, 0];
+        return [0, 0, rotation];
       case 2:
         return [rotation, 0, -rotation];
       case 3:
