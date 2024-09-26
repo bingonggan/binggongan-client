@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   useItemListIndexStore,
   useCustomizedItemListStore,
   usePackedBoxAndItemListStore,
+  useModelStore,
 } from "../../store";
 
 const BottomBarContainer = styled.div`
@@ -62,7 +65,7 @@ const ArrowBox = styled.div`
   height: 100%;
 `;
 
-const ButtonBox = styled.div`
+const ButtonBox = styled.button`
   height: 30%;
   width: 15%;
   border: 1px solid #d9d9d9;
@@ -76,10 +79,14 @@ const ButtonBox = styled.div`
 function BottomBar() {
   const { increaseItemListIndex, decreaseItemListIndex, itemListIndex } =
     useItemListIndexStore();
-  const { customizedItemList, deleteCustomizedItemList } =
-    useCustomizedItemListStore();
-  const { setPackedBoxAndItemList, setIsPacked } =
+  const {
+    customizedItemList,
+    deleteCustomizedItemList,
+    initiateCustomizedItemList,
+  } = useCustomizedItemListStore();
+  const { setPackedBoxAndItemList, setIsPacked, isPacked } =
     usePackedBoxAndItemListStore();
+  const { initiateModelList } = useModelStore();
 
   const contentList = new Array(5).fill(0);
 
@@ -99,6 +106,12 @@ function BottomBar() {
     deleteCustomizedItemList(itemIndex);
   }
 
+  function initiateMainScene() {
+    initiateCustomizedItemList();
+    initiateModelList();
+    setIsPacked(false);
+  }
+
   async function handlePacking() {
     const items = customizedItemList.map((object) => {
       return {
@@ -113,24 +126,43 @@ function BottomBar() {
     });
     const stringifyItems = JSON.stringify({ items });
 
-    const response = await fetch(import.meta.env.VITE_SERVER_ORIGIN, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: stringifyItems,
-    });
-    const jsonResponse = await response.json();
-    const packedBoxAndItemList = jsonResponse.result;
-    console.log(packedBoxAndItemList);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_ORIGIN}/packing`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: stringifyItems,
+        },
+      );
+      const jsonResponse = await response.json();
+      const packedBoxAndItemList = jsonResponse.result;
+      const boxSize = packedBoxAndItemList[0].boxSize[0];
 
-    setPackedBoxAndItemList(packedBoxAndItemList);
-    setIsPacked(true);
+      setPackedBoxAndItemList(packedBoxAndItemList);
+      setIsPacked(true);
+      toast(
+        <div>
+          <h1>{`우체국 상자 ${boxSize}로 포장되었습니다.`}</h1>
+          <button onClick={initiateMainScene}>초기화하기</button>
+        </div>,
+        {
+          autoClose: false,
+        },
+      );
+    } catch (error) {
+      toast(`포장되지 않았습니다. 아이템을 추가해 주세요`);
+    }
   }
 
   return (
     <BottomBarContainer>
-      <ButtonBox onClick={handlePacking}>포장하기</ButtonBox>
+      <ButtonBox disabled={isPacked} onClick={handlePacking}>
+        포장하기
+      </ButtonBox>
+      <ToastContainer />
       <ContentBox>
         <ArrowBox onClick={handleDecreaseIndex}>
           <img src="/left-arrow.png" alt="왼쪽 화살표" />

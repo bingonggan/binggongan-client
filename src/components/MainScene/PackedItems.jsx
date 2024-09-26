@@ -33,7 +33,7 @@ function PackedItems() {
       case 4:
         return [0, rotation, rotation];
       case 5:
-        return [rotation, rotation, 0];
+        return [rotation, 0, 0];
     }
   }
 

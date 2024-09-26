@@ -3,3 +3,9 @@
 node_modules
 .Ds_Store
 .env
+
+#firebase hosting
+.firebaserc
+.firebase
+.github
+firebase.json

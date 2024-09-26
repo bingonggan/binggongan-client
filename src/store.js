@@ -65,7 +65,7 @@ const useModelStore = create((set) => ({
   modelList: [],
   setModelList: (model) =>
     set((state) => ({ modelList: [...state.modelList, model] })),
-  initModelList: () => set({ modelList: [] }),
+  initiateModelList: () => set({ modelList: [] }),
 }));
 
 export {
