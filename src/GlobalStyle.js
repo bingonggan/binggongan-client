@@ -8,9 +8,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    font-family: "Poor Story", system-ui;
-    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
     font-style: normal;
+    font-size: 20px;
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;

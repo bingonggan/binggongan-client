@@ -1,22 +1,28 @@
 import { useEffect } from "react";
+import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Plane } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-import { usePackedBoxAndItemListStore, useModelStore } from "../../store";
-import { BOX_SIZE } from "../../../constants";
+import {
+  usePackedBoxAndItemListStore,
+  useModelStore,
+  useActiveIndexStore,
+} from "../../store";
+import { BOX_SIZE } from "../../constants";
 import BoxItem from "./BoxItem";
 
 function PackedItems() {
   const { packedBoxAndItemList } = usePackedBoxAndItemListStore();
   const { modelList, setModelList } = useModelStore();
+  const { activeIndex } = useActiveIndexStore();
   const packedBoxSize = packedBoxAndItemList[0].boxSize[1];
   const packedItemList = packedBoxAndItemList[0].itemList;
 
   const boxScale = [
-    packedBoxSize[0] / BOX_SIZE.x,
-    packedBoxSize[1] / BOX_SIZE.y,
-    packedBoxSize[2] / BOX_SIZE.z,
+    packedBoxSize[0] / BOX_SIZE.w,
+    packedBoxSize[1] / BOX_SIZE.h,
+    packedBoxSize[2] / BOX_SIZE.d,
   ];
 
   function calculateRotationType(rotationType) {
@@ -41,7 +47,7 @@ function PackedItems() {
 
   useEffect(() => {
     packedItemList.map(async (item) => {
-      const itemUrl = `${import.meta.env.VITE_ITEM_URL}/packed_${item.itemName}.glb`;
+      const itemUrl = `${import.meta.env.VITE_ITEM_URL}/${item.itemName}.glb`;
       const position = item.position.map((value) => {
         return value / 100;
       });
@@ -49,8 +55,9 @@ function PackedItems() {
       const scene = glbModel.scene;
       const scale = item.itemScale;
       const rotation = calculateRotationType(item.rotationType);
+      const originalIndex = item.itemIndex;
 
-      setModelList({ scene, scale, position, rotation });
+      setModelList({ scene, scale, position, rotation, originalIndex });
     });
   }, []);
 
@@ -60,6 +67,22 @@ function PackedItems() {
       <directionalLight position={[10, 10, 5]} intensity={1.5} />
       <BoxItem scale={boxScale} />
       {modelList.map((model, index) => {
+        model.scene.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            if (!child.userData.originalMaterial) {
+              child.userData.originalMaterial = child.material.clone();
+            }
+
+            if (model.originalIndex == activeIndex) {
+              child.material = new THREE.MeshStandardMaterial({
+                color: 0x00ff00,
+              });
+            } else {
+              child.material = child.userData.originalMaterial;
+            }
+          }
+        });
+
         return (
           <primitive
             key={index}
@@ -70,18 +93,6 @@ function PackedItems() {
           />
         );
       })}
-      <Plane
-        args={[300, 300]}
-        position={[0, -1, 0]}
-        rotation={[-Math.PI / 2, 0, 0]}
-      >
-        <meshStandardMaterial
-          attach="material"
-          color="#a89b91"
-          roughness={0.8}
-          metalness={0.1}
-        />
-      </Plane>
       <OrbitControls />
     </Canvas>
   );

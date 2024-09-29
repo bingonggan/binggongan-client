@@ -1,52 +1,51 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
-import LibraryItemCard from "./LibraryItemCard";
-import { useItemListStore } from "../../store";
+import PresetItemList from "./PresetItemList";
+import MyItemList from "./MyItemList";
+import PackingItems from "./PackingItems";
 
-const StyledSidebar = styled.div`
-  height: 90vh;
-  width: 200px;
-  min-width: 200px;
+const SidebarContainer = styled.div`
+  width: 400px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  background-color: #d9d9d9;
+  padding: 16px;
 `;
 
-const Header = styled.div`
-  min-height: 50px;
+const TitleContainer = styled.div`
+  height: 10vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+`;
+
+const LogoImageStyled = styled.img``;
+
+const PresetItemListContainer = styled.div`
+  height: 40vh;
+`;
+
+const AddedItemListContainer = styled.div`
+  height: 40vh;
+`;
+
+const PackingItemsContainer = styled.div`
+  height: 10vh;
 `;
 
 function Sidebar() {
-  const { itemList, setItemList } = useItemListStore();
-
-  const itemListExists = itemList.length !== 0;
-
-  useEffect(() => {
-    async function fetchImageList() {
-      const response = await fetch(import.meta.env.VITE_ITEM_LIST);
-      const imageList = await response.json();
-
-      setItemList(imageList.items);
-    }
-
-    fetchImageList();
-  }, []);
-
   return (
-    <StyledSidebar>
-      <Header>
-        <h1>물건</h1>
-      </Header>
-      {itemListExists &&
-        itemList.map((item, index) => {
-          return <LibraryItemCard key={index} item={item} />;
-        })}
-    </StyledSidebar>
+    <SidebarContainer>
+      <TitleContainer>
+        <LogoImageStyled src="logo.png" />
+      </TitleContainer>
+      <PresetItemListContainer>
+        <PresetItemList />
+      </PresetItemListContainer>
+      <AddedItemListContainer>
+        <MyItemList />
+      </AddedItemListContainer>
+      <PackingItemsContainer>
+        <PackingItems>포장하기</PackingItems>
+      </PackingItemsContainer>
+    </SidebarContainer>
   );
 }
 

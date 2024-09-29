@@ -1,19 +1,42 @@
 import styled from "styled-components";
 
-const StyledButton = styled.div`
-  position: absolute;
-  top: ${({ $top }) => $top}%;
-  left: ${({ $left }) => $left}%;
-  padding: 20px 40px;
-  border: 1px solid #d9d9d9;
-  font-size: 2rem;
+const StyledButton = styled.button`
+  width: 100%;
+  height: 100%;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1rem")};
+  color: white;
   cursor: pointer;
+  background-color: ${({ $backgroundColor }) =>
+    $backgroundColor ? $backgroundColor : "#8b3dff"};
+  border-radius: 10px;
+  &:hover {
+    background: ${({ $hoverBackgroundColor }) =>
+      $hoverBackgroundColor ? $hoverBackgroundColor : "#7731d8"};
+    transition: 0.3s;
+  }
+  &:active {
+    background: ${({ $activeBackgroundColor }) =>
+      $activeBackgroundColor ? $activeBackgroundColor : "#612dae"};
+  }
 `;
 
-function Button({ onClick, top, left, children }) {
+function Button({
+  onClick,
+  message,
+  fontSize,
+  backgroundColor,
+  hoverBackgroundColor,
+  activeBackgroundColor,
+}) {
   return (
-    <StyledButton onClick={onClick} $top={top} $left={left}>
-      {children}
+    <StyledButton
+      onClick={onClick}
+      fontSize={fontSize}
+      $backgroundColor={backgroundColor}
+      $hoverBackgroundColor={hoverBackgroundColor}
+      $activeBackgroundColor={activeBackgroundColor}
+    >
+      {message}
     </StyledButton>
   );
 }

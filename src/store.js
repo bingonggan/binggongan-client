@@ -10,7 +10,6 @@ const useItemStateStore = create((set) => ({
   itemName: "",
   itemTitle: "",
   itemUrl: null,
-  itemImageUrl: null,
   itemW: 0,
   itemH: 0,
   itemD: 0,
@@ -21,10 +20,9 @@ const useItemStateStore = create((set) => ({
   setItemTitle: (itemTitle) => set({ itemTitle }),
   setIsOpen: (isOpen) => set({ isOpen }),
   setItemUrl: (itemUrl) => set({ itemUrl }),
-  setItemImageUrl: (itemImageUrl) => set({ itemImageUrl }),
-  setItemW: (itemW) => set({ itemW: parseInt(itemW, 10) }),
-  setItemH: (itemH) => set({ itemH: parseInt(itemH, 10) }),
-  setItemD: (itemD) => set({ itemD: parseInt(itemD, 10) }),
+  setItemW: (itemW) => set({ itemW }),
+  setItemH: (itemH) => set({ itemH }),
+  setItemD: (itemD) => set({ itemD }),
   setInitItemW: (initItemW) => set({ initItemW }),
   setInitItemH: (initItemH) => set({ initItemH }),
   setInitItemD: (initItemD) => set({ initItemD }),
@@ -68,6 +66,11 @@ const useModelStore = create((set) => ({
   initiateModelList: () => set({ modelList: [] }),
 }));
 
+const useActiveIndexStore = create((set) => ({
+  activeIndex: null,
+  setActiveIndex: (activeIndex) => set({ activeIndex }),
+}));
+
 export {
   useItemListStore,
   useItemStateStore,
@@ -75,4 +78,5 @@ export {
   useItemListIndexStore,
   usePackedBoxAndItemListStore,
   useModelStore,
+  useActiveIndexStore,
 };
