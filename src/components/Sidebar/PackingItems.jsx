@@ -66,6 +66,9 @@ function PackingItems() {
           onClick={initiatePacking}
           message={"초기화하기"}
           fontSize={"2rem"}
+          backgroundColor={"#ff3232"}
+          hoverBackgroundColor={"#ff0000"}
+          activeBackgroundColor={"#cd0000"}
         />
       ) : (
         <Button

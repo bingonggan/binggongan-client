@@ -12,6 +12,7 @@ const ItemToolTipContainer = styled.div`
   top: 5%;
   left: 1%;
   width: 30%;
+  max-width: 400px;
   height: 50%;
   z-index: 1;
   border-radius: 15px;
@@ -52,7 +53,6 @@ function ItemToolTip() {
   const {
     itemName,
     itemTitle,
-    itemUrl,
     initItemW,
     initItemH,
     initItemD,

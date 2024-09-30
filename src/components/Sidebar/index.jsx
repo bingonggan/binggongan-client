@@ -16,8 +16,6 @@ const TitleContainer = styled.div`
   display: flex;
 `;
 
-const LogoImageStyled = styled.img``;
-
 const PresetItemListContainer = styled.div`
   height: 40vh;
 `;
@@ -34,7 +32,7 @@ function Sidebar() {
   return (
     <SidebarContainer>
       <TitleContainer>
-        <LogoImageStyled src="logo.png" />
+        <img src="logo.png" alt="빈공간 로고" />
       </TitleContainer>
       <PresetItemListContainer>
         <PresetItemList />
