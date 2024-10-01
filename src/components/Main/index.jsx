@@ -3,7 +3,7 @@ import styled from "styled-components";
 import MainScene from "../MainScene";
 import Sidebar from "../Sidebar";
 
-const StyledMain = styled.div`
+const MainContainer = styled.div`
   display: flex;
   height: 100vh;
   flex-direction: row;
@@ -12,10 +12,10 @@ const StyledMain = styled.div`
 
 function Main() {
   return (
-    <StyledMain>
+    <MainContainer>
       <Sidebar />
       <MainScene />
-    </StyledMain>
+    </MainContainer>
   );
 }
 

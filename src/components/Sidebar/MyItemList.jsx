@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useRef, useEffect } from "react";
 
 import {
   useCustomizedItemListStore,
@@ -16,17 +17,13 @@ const TitleContainer = styled.div`
 
 const ListContainer = styled.div`
   height: 80%;
-  flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const ItemContainer = styled.div`
   display: flex;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-bottom: 10px;
+  padding: 0.5rem;
+  justify-content: space-between;
 `;
 
 const PackedItemContainer = styled.div`
@@ -37,7 +34,6 @@ const PackedItemContainer = styled.div`
   padding-right: 12px;
   padding-top: 8px;
   padding-bottom: 8px;
-  margin-bottom: 10px;
   &:hover {
     border-radius: 10px;
     background: #ebecf0;
@@ -48,12 +44,8 @@ const PackedItemContainer = styled.div`
   }
 `;
 
-const ItemExplainContainer = styled.div`
-  width: 80%;
-`;
-
-const DeleteContainer = styled.div`
-  width: 20%;
+const ItemExplainContainer = styled.span`
+  padding: 0.5rem;
 `;
 
 function MyItemList() {
@@ -62,13 +54,19 @@ function MyItemList() {
   const { setActiveIndex } = useActiveIndexStore();
   const { isPacked } = usePackedBoxAndItemListStore();
 
+  const itemListEndRef = useRef(null);
+
+  useEffect(() => {
+    itemListEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [customizedItemList]);
+
   function activateItem(index) {
     setActiveIndex(index);
   }
 
   return (
     <>
-      <TitleContainer>내 아이템 리스트</TitleContainer>
+      <TitleContainer>내 아이템</TitleContainer>
       <ListContainer>
         {customizedItemList.map((item, index) => {
           return isPacked ? (
@@ -81,19 +79,18 @@ function MyItemList() {
           ) : (
             <ItemContainer key={index}>
               <ItemExplainContainer>{`${index + 1}. ${item.itemTitle}`}</ItemExplainContainer>
-              <DeleteContainer>
-                <Button
-                  message={"삭제"}
-                  onClick={() => deleteCustomizedItemList(index)}
-                  backgroundColor={"#ff3232"}
-                  fontSize={"0.8rem"}
-                  hoverBackgroundColor={"#ff0000"}
-                  activeBackgroundColor={"#cd0000"}
-                />
-              </DeleteContainer>
+              <Button
+                message={"삭제"}
+                onClick={() => deleteCustomizedItemList(index)}
+                fontSize={"0.6em"}
+                backgroundColor={"#5e5470"}
+                hoverBackgroundColor={"#322e38"}
+                activeBackgroundColor={"#322e38"}
+              />
             </ItemContainer>
           );
         })}
+        <div ref={itemListEndRef}></div>
       </ListContainer>
     </>
   );

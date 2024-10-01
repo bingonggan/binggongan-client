@@ -66,6 +66,12 @@ const useModelStore = create((set) => ({
   initiateModelList: () => set({ modelList: [] }),
 }));
 
+const useBoxStore = create((set) => ({
+  boxList: [],
+  setBoxList: (box) => set((state) => ({ boxList: [...state.boxList, box] })),
+  initiateBoxList: () => set({ boxList: [] }),
+}));
+
 const useActiveIndexStore = create((set) => ({
   activeIndex: null,
   setActiveIndex: (activeIndex) => set({ activeIndex }),
@@ -78,5 +84,6 @@ export {
   useItemListIndexStore,
   usePackedBoxAndItemListStore,
   useModelStore,
+  useBoxStore,
   useActiveIndexStore,
 };

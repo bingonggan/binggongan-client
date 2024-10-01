@@ -9,44 +9,41 @@ const ItemToolTipContainer = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 5%;
-  left: 1%;
-  width: 30%;
-  max-width: 400px;
-  height: 50%;
+  justify-contents: center;
+  align-items: center;
+  padding: 2rem;
+  gap: 1rem;
   z-index: 1;
   border-radius: 15px;
-  border-color: rgba(74, 46, 126, 0.15);
-  border-style: solid;
-  border-width: 1px;
+  border: 1px solid rgba(74, 46, 126, 0.15);
   background-color: #f1f1fc;
 `;
 
 const ExplainContainer = styled.div`
-  margin-top: 3%;
   text-align: center;
+  font-weight: bold;
+  color: blue;
+  margin-bottom: 1rem;
 `;
 
 const ControlContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5%;
-  margin-left: 5%;
-  margin-right: 5%;
+  gap: 0.5rem;
 `;
 
 const InputContainer = styled.div`
-  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.1rem;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
-  margin-top: 10%;
-  justify-content: space-around;
-`;
-
-const ButtonContainer = styled.div`
-  width: 30%;
+  justify-content: space-between;
+  gap: 0.1rem;
 `;
 
 function ItemToolTip() {
@@ -87,10 +84,10 @@ function ItemToolTip() {
 
   return (
     <ItemToolTipContainer>
-      <ExplainContainer>
-        <span>아이템의 이름과 크기를 입력해 주세요</span>
-      </ExplainContainer>
       <ControlContainer>
+        <ExplainContainer>
+          <span>아이템의 크기와 이름을 입력해 주세요</span>
+        </ExplainContainer>
         <InputContainer>
           <NumberInput
             label={"길이(mm)"}
@@ -98,46 +95,42 @@ function ItemToolTip() {
             initValue={initItemW}
             setValue={setItemW}
           />
-        </InputContainer>
-        <InputContainer>
           <NumberInput
             label={"높이(mm)"}
             value={itemH}
             initValue={initItemH}
             setValue={setItemH}
           />
-        </InputContainer>
-        <InputContainer>
           <NumberInput
             label={"너비(mm)"}
             value={itemD}
             initValue={initItemD}
             setValue={setItemD}
           />
-        </InputContainer>
-        <InputContainer>
           <TextInput
             label={"아이템 이름"}
             value={itemTitle}
             setValue={setItemTitle}
           />
         </InputContainer>
-      </ControlContainer>
-      <ButtonsContainer>
-        <ButtonContainer>
+        <ButtonsContainer>
           <Button
             message={"취소"}
             onClick={() => setIsOpen(false)}
-            backgroundColor={"#ff3232"}
-            fontSize={"1.5rem"}
-            hoverBackgroundColor={"#ff0000"}
-            activeBackgroundColor={"#cd0000"}
+            fontSize={"1rem"}
+            backgroundColor={"#5e5470"}
+            hoverBackgroundColor={"#322e38"}
+            activeBackgroundColor={"#322e38"}
+            packing
           />
-        </ButtonContainer>
-        <ButtonContainer>
-          <Button message={"추가"} fontSize={"1.5rem"} onClick={registerItem} />
-        </ButtonContainer>
-      </ButtonsContainer>
+          <Button
+            message={"추가"}
+            fontSize={"1rem"}
+            onClick={registerItem}
+            packing
+          />
+        </ButtonsContainer>
+      </ControlContainer>
     </ItemToolTipContainer>
   );
 }

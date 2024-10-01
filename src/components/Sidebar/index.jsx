@@ -41,7 +41,7 @@ function Sidebar() {
         <MyItemList />
       </AddedItemListContainer>
       <PackingItemsContainer>
-        <PackingItems>포장하기</PackingItems>
+        <PackingItems />
       </PackingItemsContainer>
     </SidebarContainer>
   );

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useItemStateStore } from "../../store";
+import { useItemStateStore, usePackedBoxAndItemListStore } from "../../store";
 import { ITEM_LIST } from "../../constants";
 
 const TitleContainer = styled.div`
@@ -54,6 +54,7 @@ function PresetItemList() {
     setInitItemH,
     setInitItemD,
   } = useItemStateStore();
+  const { isPacked } = usePackedBoxAndItemListStore();
 
   return (
     <>
