@@ -38,7 +38,7 @@ function MainScene() {
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 10, 5]} intensity={1.5} />
             <BoxItem position={[0, 0, 0]} />
-            <OrbitControls />
+            <OrbitControls enablePan={false} maxDistance={300} />
           </Canvas>
           {isOpen && <ItemToolTip />}
         </CanvasContainer>

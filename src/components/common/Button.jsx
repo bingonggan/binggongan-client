@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledButton = styled.button`
   width: ${({ $packing }) => $packing && "100%"};
   padding: 0.5rem 1.5rem;
+
   font-size: ${(props) => (props.fontSize ? props.fontSize : "1rem")};
   color: white;
   cursor: pointer;

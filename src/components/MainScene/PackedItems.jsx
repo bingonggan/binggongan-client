@@ -66,7 +66,7 @@ function PackedItems() {
 
   useEffect(() => {
     boxSizeList.forEach(async (boxSize, index) => {
-      const boxUrl = import.meta.env.VITE_BOX_ITEM;
+      const boxUrl = import.meta.env.VITE_PACKED_BOX_ITEM;
       const scale = [
         boxSize[0] / BOX_SIZE.w,
         boxSize[1] / BOX_SIZE.h,
@@ -128,7 +128,7 @@ function PackedItems() {
             />
           );
         })}
-        <OrbitControls />
+        <OrbitControls enablePan={false} maxDistance={300} />
       </Canvas>
       <ResultToolTip />
     </>

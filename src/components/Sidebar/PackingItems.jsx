@@ -59,8 +59,6 @@ function PackingItems() {
       const jsonResponse = await response.json();
       const packedBoxAndItemList = jsonResponse.result;
 
-      console.log(packedBoxAndItemList);
-
       setPackedBoxAndItemList(packedBoxAndItemList);
       setIsPacked(true);
     } catch (error) {
