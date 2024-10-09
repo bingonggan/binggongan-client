@@ -87,7 +87,7 @@ function PackedItems() {
         <directionalLight position={[10, 10, 5]} intensity={1.5} />
         {boxList.map((box, index) => {
           box.scene.traverse((child) => {
-            if (child.isMesh) {
+            if (child instanceof THREE.Mesh) {
               child.material.transparent = true;
               child.material.opacity = 0.5;
             }
@@ -128,7 +128,7 @@ function PackedItems() {
             />
           );
         })}
-        <OrbitControls enablePan={false} maxDistance={300} />
+        <OrbitControls enablePan={false} maxDistance={30} />
       </Canvas>
       <ResultToolTip />
     </>
