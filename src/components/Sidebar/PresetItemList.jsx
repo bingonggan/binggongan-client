@@ -50,11 +50,11 @@ function PresetItemList() {
     setItemW,
     setItemH,
     setItemD,
+    setLoadBear,
     setInitItemW,
     setInitItemH,
     setInitItemD,
   } = useItemStateStore();
-  const { isPacked } = usePackedBoxAndItemListStore();
 
   return (
     <>
@@ -67,6 +67,7 @@ function PresetItemList() {
           const itemW = item[itemName].w;
           const itemH = item[itemName].h;
           const itemD = item[itemName].d;
+          const itemLoadBear = item[itemName].loadBear;
 
           return (
             <ItemContainer
@@ -79,13 +80,14 @@ function PresetItemList() {
                 setItemW(itemW);
                 setItemH(itemH);
                 setItemD(itemD);
+                setLoadBear(itemLoadBear)
                 setInitItemW(itemW);
                 setInitItemH(itemH);
                 setInitItemD(itemD);
               }}
             >
               <ItemImageContainer>
-                <img src={`${itemName}.svg`} width={"24px"} height={"24px"} />
+                <img src={`${itemName}.svg`} width={"24px"} height={"24px"} alt={itemName}/>
               </ItemImageContainer>
               <ItemTitleContainer>{itemTitle}</ItemTitleContainer>
             </ItemContainer>

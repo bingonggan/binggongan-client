@@ -1,10 +1,5 @@
 import { create } from "zustand";
 
-const useItemListStore = create((set) => ({
-  itemList: [],
-  setItemList: (itemList) => set({ itemList }),
-}));
-
 const useItemStateStore = create((set) => ({
   isOpen: false,
   itemName: "",
@@ -13,6 +8,7 @@ const useItemStateStore = create((set) => ({
   itemW: 0,
   itemH: 0,
   itemD: 0,
+  loadBear: 0,
   initItemW: 0,
   initItemH: 0,
   initItemD: 0,
@@ -23,6 +19,7 @@ const useItemStateStore = create((set) => ({
   setItemW: (itemW) => set({ itemW }),
   setItemH: (itemH) => set({ itemH }),
   setItemD: (itemD) => set({ itemD }),
+  setLoadBear: (loadBear) => set({ loadBear }),
   setInitItemW: (initItemW) => set({ initItemW }),
   setInitItemH: (initItemH) => set({ initItemH }),
   setInitItemD: (initItemD) => set({ initItemD }),
@@ -41,14 +38,6 @@ const useCustomizedItemListStore = create((set) => ({
       ),
     })),
   initiateCustomizedItemList: () => set(() => ({ customizedItemList: [] })),
-}));
-
-const useItemListIndexStore = create((set) => ({
-  itemListIndex: 0,
-  increaseItemListIndex: () =>
-    set((state) => ({ itemListIndex: state.itemListIndex + 1 })),
-  decreaseItemListIndex: () =>
-    set((state) => ({ itemListIndex: state.itemListIndex - 1 })),
 }));
 
 const usePackedBoxAndItemListStore = create((set) => ({
@@ -78,10 +67,8 @@ const useActiveIndexStore = create((set) => ({
 }));
 
 export {
-  useItemListStore,
   useItemStateStore,
   useCustomizedItemListStore,
-  useItemListIndexStore,
   usePackedBoxAndItemListStore,
   useModelStore,
   useBoxStore,

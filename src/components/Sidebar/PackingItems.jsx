@@ -36,6 +36,7 @@ function PackingItems() {
         itemW: item.itemW,
         itemH: item.itemH,
         itemD: item.itemD,
+        loadBear: item.loadBear,
       };
     });
     const jsonItemList = JSON.stringify({ items });

@@ -53,6 +53,7 @@ function ItemToolTip() {
     initItemW,
     initItemH,
     initItemD,
+    loadBear,
     itemW,
     itemH,
     itemD,
@@ -78,6 +79,7 @@ function ItemToolTip() {
       itemW,
       itemH,
       itemD,
+      loadBear,
     });
     setIsOpen(false);
   }

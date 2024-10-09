@@ -11,6 +11,7 @@ const ITEM_LIST = [
       w: 152,
       h: 200,
       d: 15,
+      loadBear: 500,
     },
   },
   {
@@ -19,6 +20,7 @@ const ITEM_LIST = [
       w: 310,
       h: 130,
       d: 200,
+      loadBear: 2000,
     },
   },
   {
@@ -27,6 +29,7 @@ const ITEM_LIST = [
       w: 200,
       h: 230,
       d: 200,
+      loadBear: 1000,
     },
   },
   {
@@ -35,6 +38,7 @@ const ITEM_LIST = [
       w: 180,
       h: 300,
       d: 180,
+      loadBear: 5000,
     },
   },
   {
@@ -43,6 +47,7 @@ const ITEM_LIST = [
       w: 70,
       h: 210,
       d: 70,
+      loadBear: 350,
     },
   },
 ];
