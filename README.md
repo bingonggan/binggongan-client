@@ -17,11 +17,13 @@
   - [클라이언트](#%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8)
   - [배포](#%EB%B0%B0%ED%8F%AC)
 - [3. 핵심 기능 구현 과정](#3-%ED%95%B5%EC%8B%AC-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84-%EA%B3%BC%EC%A0%95)
-  - [3-1 어떻게 상자에 빈 공간 없이 물건들을 포장할 수 있을까?](#3-1-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%83%81%EC%9E%90%EC%97%90-%EB%B9%88-%EA%B3%B5%EA%B0%84-%EC%97%86%EC%9D%B4-%EB%AC%BC%EA%B1%B4%EB%93%A4%EC%9D%84-%ED%8F%AC%EC%9E%A5%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C)
-  - [3-2 3D bin packing 알고리즘 적용하기](#3-2-3d-bin-packing-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0)
+  - [3-1 빈 공간 없이 효율적으로 포장하기](#3-1-%EB%B9%88-%EA%B3%B5%EA%B0%84-%EC%97%86%EC%9D%B4-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9C%BC%EB%A1%9C-%ED%8F%AC%EC%9E%A5%ED%95%98%EA%B8%B0)
+    - [3D bin packing algorithm](#3d-bin-packing-algorithm)
+    - [알고리즘 선정하기](#%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%84%A0%EC%A0%95%ED%95%98%EA%B8%B0)
+  - [3-2 3D bin packing 알고리즘의 적용](#3-2-3d-bin-packing-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%98-%EC%A0%81%EC%9A%A9)
   - [3-3 포장 상자 크기 추천하기](#3-3-%ED%8F%AC%EC%9E%A5-%EC%83%81%EC%9E%90-%ED%81%AC%EA%B8%B0-%EC%B6%94%EC%B2%9C%ED%95%98%EA%B8%B0)
     - [사용자에게 유용한 정보 제공하기](#%EC%82%AC%EC%9A%A9%EC%9E%90%EC%97%90%EA%B2%8C-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EC%A0%95%EB%B3%B4-%EC%A0%9C%EA%B3%B5%ED%95%98%EA%B8%B0)
-    - [크기 추천 알고리즘](#%ED%81%AC%EA%B8%B0-%EC%B6%94%EC%B2%9C-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
+    - [상자 크기 추천 알고리즘 작성하기](#%EC%83%81%EC%9E%90-%ED%81%AC%EA%B8%B0-%EC%B6%94%EC%B2%9C-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0)
 - [4. 사용자 편의성 향상](#4-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%8E%B8%EC%9D%98%EC%84%B1-%ED%96%A5%EC%83%81)
   - [4-1 클릭으로 내 아이템의 위치를 알수있게 해보자](#4-1-%ED%81%B4%EB%A6%AD%EC%9C%BC%EB%A1%9C-%EB%82%B4-%EC%95%84%EC%9D%B4%ED%85%9C%EC%9D%98-%EC%9C%84%EC%B9%98%EB%A5%BC-%EC%95%8C%EC%88%98%EC%9E%88%EA%B2%8C-%ED%95%B4%EB%B3%B4%EC%9E%90)
   - [4-2 다중 상자 포장 지원: 모든 물건을 담아보자](#4-2-%EB%8B%A4%EC%A4%91-%EC%83%81%EC%9E%90-%ED%8F%AC%EC%9E%A5-%EC%A7%80%EC%9B%90-%EB%AA%A8%EB%93%A0-%EB%AC%BC%EA%B1%B4%EC%9D%84-%EB%8B%B4%EC%95%84%EB%B3%B4%EC%9E%90)
@@ -64,11 +66,15 @@
 
 > 이 프로젝트의 핵심 기능은 물건들을 **빈공간 없이 효율적으로 포장**하고 **포장 상자의 크기를 추천하는 것**입니다.
 
-### 3-1 어떻게 상자에 빈 공간 없이 물건들을 포장할 수 있을까?
+### 3-1 빈 공간 없이 효율적으로 포장하기
+
+#### 3D bin packing algorithm
 
 물건을 빈 공간 없이 효율적으로 포장하는 문제는 3D Bin Packing Problem (3D BPP)으로 불리며, 최적의 결과값을 찾는 것이 매우 복잡한 **NP-hard 문제**로 정의됩니다. 이 문제를 해결하기 위해 **3D bin packing 알고리즘**을 사용했습니다.
 
 **3D bin packing 알고리즘**은 크기, 모양, 무게가 다른 물체를 제한된 수의 3차원 컨테이너(빈)에 포장할 때, 공간 활용을 극대화하고 빈 공간을 최소화하기 위한 최적화 알고리즘입니다. 앞서 설명드린것 처럼 3D BPP는 NP-hard 문제 이기 때문에 주로 물체들을 부피에 따라 정렬하고 하나씩 배치해보는 **휴리스틱 기법**을 통해 구현됩니다.
+
+#### 알고리즘 선정하기
 
 프로젝트 구현을 위해 같은 기준을 바탕으로 알고리즘을 선정하였습니다:
 
@@ -86,7 +92,7 @@
 
 비교한 다른 알고리즘들은 각각의 장단점이 있었지만, 회전 기능이 없거나 무게 가중치를 고려하지 않는 등의 이유로 이 프로젝트의 요구사항을 충족하지 못했습니다.
 
-### 3-2 3D bin packing 알고리즘 적용하기
+### 3-2 3D bin packing 알고리즘의 적용
 
 **jerry800416** 알고리즘은 논문을 토대로 구현되어 있습니다. 논문에는 알고리즘의 구현 방식과 알고리즘을 통해 얻을 수 있는 데이터가 명시되어 있는데요. 얻을 수 있는 데이터는 다음과 같습니다:
 
@@ -117,14 +123,14 @@ _출처: OPTIMIZING THREE-DIMENSIONAL BIN PACKING THROUGH SIMULATION(2006)_
 예를들어 타입 1의 경우 z축으로 90도 회전하면 물건의 포지션이 변경되므로 x축 좌표에 물건의 높이(h)만큼 더해줘야 물건이 원점에 정확히 위치하게 됩니다.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/7a54d492-deba-45c3-8fef-a9dc2b913d6a" width="500rem"/>
+  <img src="https://private-user-images.githubusercontent.com/66365251/376868004-066682e9-9b71-4da4-8333-864c9e0edee3.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjkwNDczNTAsIm5iZiI6MTcyOTA0NzA1MCwicGF0aCI6Ii82NjM2NTI1MS8zNzY4NjgwMDQtMDY2NjgyZTktOWI3MS00ZGE0LTgzMzMtODY0YzllMGVkZWUzLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEwMTYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMDE2VDAyNTA1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTZmOWM2ZmYxMDI3ZGIzYzViNGRhYTUzOGEyZjAwODRmMWM3OTE2ZjdiNjU1Nzc4ZDUzN2UyZjZhMTVhMGUyOTcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.fRQzdim1ajnVr6na36l43T472DCT444DAqY_Wu-BleA" width="500rem"/>
 
 _z축으로 90도 회전 시키고_
 
 </div>
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/ec8d61e3-3cfb-43e8-8f86-63a2bac189d3" width="500rem"/>
+  <img src="https://private-user-images.githubusercontent.com/66365251/376867989-34d92db5-8a59-4b12-8eb3-3b8a3cbbfa65.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjkwNDczNTAsIm5iZiI6MTcyOTA0NzA1MCwicGF0aCI6Ii82NjM2NTI1MS8zNzY4Njc5ODktMzRkOTJkYjUtOGE1OS00YjEyLThlYjMtM2I4YTNjYmJmYTY1LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEwMTYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMDE2VDAyNTA1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ5YTIzMjhjNjNlYjhjMjExOGZlZjVmYWE1ODIzYThmNWY1ZGVmMGQ0ODNlN2YxNWE4MmZiOGJjYTNmM2YxMGUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.UVPgzG_F0GjbyY6X5prP6sBcZLEb3DNGObRBiH82Ou8" width="500rem"/>
 
 _x축 좌표에 물건의 높이(h)만큼 더합니다._
 
@@ -145,21 +151,21 @@ _x축 좌표에 물건의 높이(h)만큼 더합니다._
 
 ```javascript
 function calculateRotationType(rotationType) {
-  const rotation = Math.PI / 2;
+  const rightAngle = Math.PI / 2;
 
   switch (rotationType) {
     case 0:
       return [0, 0, 0];
     case 1:
-      return [0, 0, rotation];
+      return [0, 0, rightAngle];
     case 2:
-      return [rotation, 0, -rotation];
+      return [rightAngle, 0, -rightAngle];
     case 3:
-      return [0, rotation, 0];
+      return [0, rightAngle, 0];
     case 4:
-      return [0, rotation, rotation];
+      return [0, rightAngle, rightAngle];
     case 5:
-      return [rotation, 0, 0];
+      return [rightAngle, 0, 0];
   }
 }
 ```
@@ -170,11 +176,24 @@ function calculateRotationType(rotationType) {
 
 포장 상자 크기를 추천하기 위해 **우체국상자**의 크기를 참고하였습니다.
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/858c4f80-a479-4168-8b8e-9ea6d31aaddc" width="400rem"/>
+
+_주변에서 쉽게 구할 수 있는 우체국 상자의 크기 정보_
+
+</div>
+
 우체국 상자는 실제로 포장할 때 가장 많이 사용하는 상자이며 주변에서 쉽게 구할 수 있고, 크기 정보 또한 쉽게 얻을 수 있기 때문에 사용자에게 유용한 정보가 될 것이라고 판단했습니다.
 
-#### 크기 추천 알고리즘
+#### 상자 크기 추천 알고리즘 작성하기
 
 크기 추천을 위해 가장 작은 1호 상자부터 물건을 포장해보고, 실패할 경우 다음 크기의 상자로 포장 시도를 반복하여 6호 상자까지 진행합니다. 만약 6호 상자에서도 포장이 안 되면, 포장이 불가능하다는 결과를 반환하는 재귀 로직을 작성했습니다.
+
+이 방식은 간단하지만 비효율적일 수도 있는데요.
+
+물건들의 크기를 고려했을 때 작은 상자들(1호, 2호 등)에 들어가지 않을 것이 명백한 경우에도 포장을 시도하여 불필요한 계산을 발생시키기 때문입니다.
+
+이를 개선하기 위해 물건들의 부피를 모두 더한값이 상자 크기보다 크다면 해당 상자를 계산하지 않고 건너뛰는 로직을 작성하여 개선하였습니다.
 
 ## 4. 사용자 편의성 향상
 
@@ -185,7 +204,7 @@ function calculateRotationType(rotationType) {
 그러나 구현된 프로젝트에선 **내 아이템**이 **어디에 배치**되었는지 알 수 없었습니다.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/3fcf3a3b-0d17-48bb-975c-b657a80e0f4c" width="500rem"/>
+  <img src="https://private-user-images.githubusercontent.com/66365251/376867964-29daf2bf-dac0-4aae-93dd-514e7d51645b.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjkwNDczNTAsIm5iZiI6MTcyOTA0NzA1MCwicGF0aCI6Ii82NjM2NTI1MS8zNzY4Njc5NjQtMjlkYWYyYmYtZGFjMC00YWFlLTkzZGQtNTE0ZTdkNTE2NDViLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEwMTYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMDE2VDAyNTA1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWVhZTZlMzJlZGY0ODNiNzU0OWQ0ZWRjZTg4MDliYTFiMDUzNzk4MDhkMGJlNzAyNmZiNzlhNmY2Mjc4NzFhNmMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.52EzQJVFSoRxRTRCgTsbGN2EkslLTs7FjIM_aeynbdg" width="500rem"/>
 
 _내 아이템이 어디에 배치되어 있는지 알 수 없다._
 
@@ -218,7 +237,7 @@ _내 아이템이 어디에 배치되어 있는지 알 수 없다._
 ```
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/54d9a7bc-488a-4afe-ac42-6382edfcbc3b" width="500rem"/>
+  <img src="https://private-user-images.githubusercontent.com/66365251/376867965-e9136f38-d974-4dbf-bb67-ff54a5f92fba.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjkwNDczNTAsIm5iZiI6MTcyOTA0NzA1MCwicGF0aCI6Ii82NjM2NTI1MS8zNzY4Njc5NjUtZTkxMzZmMzgtZDk3NC00ZGJmLWJiNjctZmY1NGE1ZjkyZmJhLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEwMTYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMDE2VDAyNTA1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWE1Y2M1NDY4MWRhNWU5OGE2YzEwZTI1ZWE3MDU0ZWExZjg5ODY4NTUzYWZmMmI3NjcxNmZkMTVmMzNmNTAxZDAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.CdRBhOB4iW1bMaHtolhDDYKKNo5E2nEnn4XgUFIIUHA" width="500rem"/>
 
 _내 아이템을 클릭하면 3D모델의 색이 변경됩니다._
 
@@ -284,10 +303,10 @@ _물건 20개 테스트 결과_
 
 </div>
 
-| 물건 개수 | RPS  | 평균 응답 시간(ms) |
-| --------- | ---- | ------------------ |
-| 10개      | 18.5 | 506.51             |
-| 15개      | 6.03 | 1532.76            |
-| 20개      | 1.49 | 5934.42            |
+| 물건 개수 | RPS      | 평균 응답 시간(ms) |
+| --------- | -------- | ------------------ |
+| 10개      | 18.5     | 506.51             |
+| **15개**  | **6.03** | **1532.76**        |
+| 20개      | 1.49     | 5934.42            |
 
 > 서버 부하 테스트 결과, 물건 개수가 20개로 증가할 경우 응답 시간이 급격히 증가하고 초당 요청 수가 현저히 떨어지기 때문에, 사용자 경험을 고려하여 물건 개수를 **15개로 제한**하는 것으로 결정했습니다.
