@@ -142,14 +142,14 @@ _Dube, E., Kanavathy, L. R., & Woodview, P. (2006, September). Optimizing three-
 예를들어 타입 1의 경우 z축으로 90도 회전하면 물건의 포지션이 변경되므로 x축 좌표에 물건의 높이(h)만큼 더해줘야 물건이 원점에 정확히 위치하게 됩니다.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/7bb0941e-2606-4958-a090-f4e3b796d863" width="400rem"/>
+  <img src="https://github.com/user-attachments/assets/7bb0941e-2606-4958-a090-f4e3b796d863" width="500px"/>
 
 _z축으로 90도 회전_
 
 </div>
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/00236924-169a-4515-bd95-484169a91636" width="400rem"/>
+  <img src="https://github.com/user-attachments/assets/00236924-169a-4515-bd95-484169a91636" width="500px"/>
 
 _x축 좌표에 물건의 높이(h)만큼 더합니다._
 
@@ -263,7 +263,7 @@ _내 아이템이 어디에 배치되어 있는지 알 수 없다._
 <br>
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/f1cc544e-c9c8-443c-a08d-56c4dc2578f6" width="400rem"/>
+  <img src="https://github.com/user-attachments/assets/f1cc544e-c9c8-443c-a08d-56c4dc2578f6" width="500px"/>
 
 _내 아이템을 클릭하면 3D모델의 색이 변경됩니다._
 
@@ -283,7 +283,7 @@ _내 아이템을 클릭하면 3D모델의 색이 변경됩니다._
 알고리즘 변경 후 여러 상자에 물건을 포장할 수 있게 수정되었습니다.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/90d630cc-b45a-48bd-ab74-7764e1606c19" width="400rem"/>
+  <img src="https://github.com/user-attachments/assets/90d630cc-b45a-48bd-ab74-7764e1606c19" width="500px"/>
 
 _여러 상자에 모든 물건들을 포장할 수 있습니다._
 
