@@ -283,7 +283,7 @@ _내 아이템을 클릭하면 3D모델의 색이 변경됩니다._
 알고리즘 변경 후 여러 상자에 물건을 포장할 수 있게 수정되었습니다.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/5ba1b292-1b36-479d-99b1-060f60b6fd62" width="400rem"/>
+  <img src="https://github.com/user-attachments/assets/90d630cc-b45a-48bd-ab74-7764e1606c19" width="400rem"/>
 
 _여러 상자에 모든 물건들을 포장할 수 있습니다._
 
