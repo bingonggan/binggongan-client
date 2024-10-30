@@ -4,8 +4,8 @@ import MainScene from "../MainScene";
 import Sidebar from "../Sidebar";
 
 const MainContainer = styled.div`
-  display: flex;
   height: 100vh;
+  display: flex;
   flex-direction: row;
   background-color: #f1f1fc;
 `;

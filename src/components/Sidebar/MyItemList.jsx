@@ -21,19 +21,19 @@ const ListContainer = styled.div`
 `;
 
 const ItemContainer = styled.div`
-  display: flex;
   padding: 0.5rem;
+  display: flex;
   justify-content: space-between;
 `;
 
 const PackedItemContainer = styled.div`
-  display: flex;
-  align-items: stretch;
-  cursor: pointer;
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 8px;
   padding-bottom: 8px;
+  display: flex;
+  align-items: stretch;
+  cursor: pointer;
   &:hover {
     border-radius: 10px;
     background: #ebecf0;

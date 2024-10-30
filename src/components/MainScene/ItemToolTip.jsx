@@ -7,43 +7,43 @@ import { useItemStateStore, useCustomizedItemListStore } from "../../store";
 
 const ItemToolTipContainer = styled.div`
   position: absolute;
+  z-index: 1;
+  gap: 1rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-contents: center;
   align-items: center;
-  padding: 2rem;
-  gap: 1rem;
-  z-index: 1;
+  background-color: #f1f1fc;
   border-radius: 15px;
   border: 1px solid rgba(74, 46, 126, 0.15);
-  background-color: #f1f1fc;
 `;
 
 const ExplainContainer = styled.div`
-  text-align: center;
-  font-weight: bold;
-  color: blue;
   margin-bottom: 1rem;
+  color: blue;
+  font-weight: bold;
+  text-align: center;
 `;
 
 const ControlContainer = styled.div`
+  gap: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 `;
 
 const InputContainer = styled.div`
+  gap: 0.5rem;
+  padding: 0.1rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  padding: 0.1rem;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
 `;
 
 const ButtonsContainer = styled.div`
+  gap: 0.1rem;
   display: flex;
   justify-content: space-between;
-  gap: 0.1rem;
 `;
 
 function ItemToolTip() {

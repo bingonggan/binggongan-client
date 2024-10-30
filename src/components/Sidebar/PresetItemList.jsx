@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useItemStateStore, usePackedBoxAndItemListStore } from "../../store";
+import { useItemStateStore } from "../../store";
 import { ITEM_LIST } from "../../constants";
 
 const TitleContainer = styled.div`
@@ -17,14 +17,14 @@ const ListContainer = styled.div`
 `;
 
 const ItemContainer = styled.div`
-  display: flex;
-  align-items: stretch;
-  cursor: pointer;
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 8px;
   padding-bottom: 8px;
   margin-bottom: 10px;
+  display: flex;
+  align-items: stretch;
+  cursor: pointer;
   &:hover {
     border-radius: 10px;
     background: #ebecf0;
@@ -80,14 +80,19 @@ function PresetItemList() {
                 setItemW(itemW);
                 setItemH(itemH);
                 setItemD(itemD);
-                setLoadBear(itemLoadBear)
+                setLoadBear(itemLoadBear);
                 setInitItemW(itemW);
                 setInitItemH(itemH);
                 setInitItemD(itemD);
               }}
             >
               <ItemImageContainer>
-                <img src={`${itemName}.svg`} width={"24px"} height={"24px"} alt={itemName}/>
+                <img
+                  src={`${itemName}.svg`}
+                  width={"24px"}
+                  height={"24px"}
+                  alt={itemName}
+                />
               </ItemImageContainer>
               <ItemTitleContainer>{itemTitle}</ItemTitleContainer>
             </ItemContainer>

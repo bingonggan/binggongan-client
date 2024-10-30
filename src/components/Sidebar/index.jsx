@@ -6,9 +6,9 @@ import PackingItems from "./PackingItems";
 
 const SidebarContainer = styled.div`
   width: 400px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  padding: 16px;
 `;
 
 const TitleContainer = styled.div`

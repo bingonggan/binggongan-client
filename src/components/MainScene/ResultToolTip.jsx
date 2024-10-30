@@ -5,39 +5,35 @@ import { usePackedBoxAndItemListStore } from "../../store";
 import Button from "../common/Button";
 
 const ResultToolTipContainer = styled.div`
-  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  position: fixed;
   background: rgba(0, 0, 0, 0.7);
 `;
 
 const ResultModal = styled.div`
-  position: fixed;
   top: 37%;
   left: 37%;
+  width: 27%;
+  gap: 2rem;
+  padding: 2rem;
   display: flex;
+  position: fixed;
   flex-direction: column;
   justify-content: center;
   align-items; center;
-  border-radius: 5px;
-  gap: 2rem;
   background: #FFFFFF;
-  width: 27%;
-  box-shadow: 0 0 10px #FFFFFF;
-
-  padding: 2rem;
+  border-radius: 5px;
   text-align: center;
-
+  box-shadow: 0 0 10px #FFFFFF;
   .modal-title-message {
     font-weight: bold;
     font-size: 25px;
   }
-
   span {
     font-size: 20px;
-
     strong {
       color: red;
     }
@@ -45,10 +41,10 @@ const ResultModal = styled.div`
 `;
 
 const ResultIconContainer = styled.div`
-  position: absolute;
-  cursor: pointer;
   left: 90%;
   top: 5%;
+  position: absolute;
+  cursor: pointer;
 `;
 
 const ModalButtonContainer = styled.div`

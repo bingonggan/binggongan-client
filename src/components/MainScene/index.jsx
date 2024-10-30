@@ -8,11 +8,11 @@ import ItemToolTip from "./ItemToolTip";
 import { usePackedBoxAndItemListStore, useItemStateStore } from "../../store";
 
 const MainSceneContainer = styled.div`
-  margin: 10px 10px 10px 10px;
-  border-radius: 15px;
   width: calc(100% - 400px);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  margin: 10px 10px 10px 10px;
   background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 `;
 
 const CanvasContainer = styled.div`

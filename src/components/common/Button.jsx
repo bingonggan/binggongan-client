@@ -3,14 +3,13 @@ import styled from "styled-components";
 const StyledButton = styled.button`
   width: ${({ $packing }) => $packing && "100%"};
   padding: 0.5rem 1.5rem;
-
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "1rem")};
-  color: white;
-  cursor: pointer;
-  border: none;
   background-color: ${({ $backgroundColor }) =>
     $backgroundColor ? $backgroundColor : "#8b3dff"};
+  border: none;
   border-radius: 5px;
+  color: white;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1rem")};
+  cursor: pointer;
   &:hover {
     background: ${({ $hoverBackgroundColor }) =>
       $hoverBackgroundColor ? $hoverBackgroundColor : "#5302d6"};
