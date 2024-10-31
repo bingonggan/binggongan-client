@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import NumberInput from "../common/NumberInput";
@@ -46,6 +47,12 @@ const ButtonsContainer = styled.div`
   justify-content: space-between;
 `;
 
+const ValidationMessageContainer = styled.div`
+  color: red;
+  font-size: 0.9rem;
+  text-align: center;
+`;
+
 function ItemToolTip() {
   const {
     itemName,
@@ -64,12 +71,16 @@ function ItemToolTip() {
     setIsOpen,
   } = useItemStateStore();
   const { addCustomizedItemList } = useCustomizedItemListStore();
+  const [isValid, setIsValid] = useState(true);
 
   const itemScaleW = itemW / initItemW;
   const itemScaleH = itemH / initItemH;
   const itemScaleD = itemD / initItemD;
 
   function registerItem() {
+    if (!isValid) {
+      return;
+    }
     addCustomizedItemList({
       itemName,
       itemTitle,
@@ -96,18 +107,21 @@ function ItemToolTip() {
             value={itemW}
             initValue={initItemW}
             setValue={setItemW}
+            setIsValid={setIsValid}
           />
           <NumberInput
             label={"높이(mm)"}
             value={itemH}
             initValue={initItemH}
             setValue={setItemH}
+            setIsValid={setIsValid}
           />
           <NumberInput
             label={"너비(mm)"}
             value={itemD}
             initValue={initItemD}
             setValue={setItemD}
+            setIsValid={setIsValid}
           />
           <TextInput
             label={"아이템 이름"}
@@ -115,6 +129,11 @@ function ItemToolTip() {
             setValue={setItemTitle}
           />
         </InputContainer>
+        {!isValid && (
+          <ValidationMessageContainer>
+            아이템 크기는 1mm 이상 400mm 이하여야 합니다.
+          </ValidationMessageContainer>
+        )}
         <ButtonsContainer>
           <Button
             message={"취소"}

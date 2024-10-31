@@ -21,20 +21,23 @@ const StyledInput = styled.input`
   }
 `;
 
-function NumberInput({ label, value, setValue, initValue }) {
-  const MIN = Math.floor(initValue / 2);
-  const MAX = Math.floor(initValue * 2);
+function NumberInput({ label, value, setValue, setIsValid }) {
+  function handleChange(e) {
+    const newValue = e.target.value;
+
+    if (newValue > 400 || newValue <= 0) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+
+    setValue(newValue);
+  }
 
   return (
     <>
       <StyledLabel htmlFor={label}>{label}</StyledLabel>
-      <StyledInput
-        type="number"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        min={MIN}
-        max={MAX}
-      />
+      <StyledInput type="number" value={value} onChange={handleChange} />
     </>
   );
 }
