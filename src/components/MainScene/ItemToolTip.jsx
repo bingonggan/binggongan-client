@@ -70,17 +70,25 @@ function ItemToolTip() {
     setItemTitle,
     setIsOpen,
   } = useItemStateStore();
-  const { addCustomizedItemList } = useCustomizedItemListStore();
+  const { addCustomizedItemList, customizedItemList } =
+    useCustomizedItemListStore();
   const [isValid, setIsValid] = useState(true);
+
+  const isItemListFull = customizedItemList.length >= 15;
 
   const itemScaleW = itemW / initItemW;
   const itemScaleH = itemH / initItemH;
   const itemScaleD = itemD / initItemD;
 
   function registerItem() {
-    if (!isValid) {
+    if (!isValid || isItemListFull) {
       return;
     }
+
+    if (isItemListFull) {
+      return;
+    }
+
     addCustomizedItemList({
       itemName,
       itemTitle,
@@ -92,6 +100,7 @@ function ItemToolTip() {
       itemD,
       loadBear,
     });
+
     setIsOpen(false);
   }
 
@@ -132,6 +141,11 @@ function ItemToolTip() {
         {!isValid && (
           <ValidationMessageContainer>
             아이템 크기는 1mm 이상 400mm 이하여야 합니다.
+          </ValidationMessageContainer>
+        )}
+        {isItemListFull && (
+          <ValidationMessageContainer>
+            아이템은 최대 15개까지 추가할 수 있습니다.
           </ValidationMessageContainer>
         )}
         <ButtonsContainer>
