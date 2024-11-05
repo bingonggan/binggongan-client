@@ -56,14 +56,14 @@ function ResultToolTip() {
   const { packedBoxAndItemList } = usePackedBoxAndItemListStore();
   const [isResultToolTipOpen, setIsResultToolTipOpen] = useState(true);
 
-  function handleModalClose() {
-    setIsResultToolTipOpen(false);
-  }
-
   const boxSizeList = packedBoxAndItemList.map(
     (boxAndItem) => boxAndItem.boxSize[0],
   );
   const boxSize = boxSizeList.join(", ");
+
+  function handleModalClose() {
+    setIsResultToolTipOpen(false);
+  }
 
   return isResultToolTipOpen ? (
     <ResultToolTipContainer onClick={handleModalClose}>
@@ -74,8 +74,13 @@ function ResultToolTip() {
         <span>내 아이템을 클릭하면 위치를 확인할 수 있습니다.</span>
         <ModalButtonContainer>
           <Button
-            message={"확인"}
             onClick={() => setIsResultToolTipOpen(false)}
+            message={"확인"}
+            fontSize={null}
+            backgroundColor={null}
+            hoverBackgroundColor={null}
+            activeBackgroundColor={null}
+            packing={false}
           />
         </ModalButtonContainer>
       </ResultModal>

@@ -110,21 +110,18 @@ function ItemToolTip() {
           <NumberInput
             label={"길이(mm)"}
             value={itemW}
-            initValue={initItemW}
             setValue={setItemW}
             setIsValid={setIsValid}
           />
           <NumberInput
             label={"높이(mm)"}
             value={itemH}
-            initValue={initItemH}
             setValue={setItemH}
             setIsValid={setIsValid}
           />
           <NumberInput
             label={"너비(mm)"}
             value={itemD}
-            initValue={initItemD}
             setValue={setItemD}
             setIsValid={setIsValid}
           />
@@ -152,13 +149,16 @@ function ItemToolTip() {
             backgroundColor={"#5e5470"}
             hoverBackgroundColor={"#322e38"}
             activeBackgroundColor={"#322e38"}
-            packing
+            packing={true}
           />
           <Button
             message={"추가"}
             fontSize={"1rem"}
             onClick={registerItem}
-            packing
+            backgroundColor={null}
+            hoverBackgroundColor={null}
+            activeBackgroundColor={null}
+            packing={true}
           />
         </ButtonsContainer>
       </ControlContainer>

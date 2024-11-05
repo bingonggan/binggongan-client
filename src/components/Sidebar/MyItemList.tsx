@@ -86,6 +86,7 @@ function MyItemList() {
                 backgroundColor={"#5e5470"}
                 hoverBackgroundColor={"#322e38"}
                 activeBackgroundColor={"#322e38"}
+                packing={false}
               />
             </ItemContainer>
           );

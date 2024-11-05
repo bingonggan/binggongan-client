@@ -1,6 +1,24 @@
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+type ButtonState = {
+  onClick: () => void;
+  message: string;
+  fontSize: string;
+  backgroundColor: string | null;
+  hoverBackgroundColor: string | null;
+  activeBackgroundColor: string | null;
+  packing: Boolean | null;
+};
+
+type StyledButtonProps = {
+  $packing: Boolean;
+  $backgroundColor: string | null;
+  $hoverBackgroundColor: string | null;
+  $activeBackgroundColor: string | null;
+  fontSize: string | null;
+};
+
+const StyledButton = styled.button<StyledButtonProps>`
   width: ${({ $packing }) => $packing && "100%"};
   padding: 0.5rem 1.5rem;
   background-color: ${({ $backgroundColor }) =>
@@ -29,7 +47,7 @@ function Button({
   hoverBackgroundColor,
   activeBackgroundColor,
   packing,
-}) {
+}: ButtonState) {
   return (
     <StyledButton
       onClick={onClick}

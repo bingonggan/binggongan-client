@@ -7,16 +7,18 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import ResultToolTip from "./ResultToolTip";
 import {
   usePackedBoxAndItemListStore,
-  useModelStore,
+  useModelStateStore,
   useActiveIndexStore,
-  useBoxStore,
+  useBoxStateStore,
 } from "../../store";
 import { BOX_SIZE } from "../../constants";
 
+import type { Model } from "../../stateTypes";
+
 function PackedItems() {
   const { packedBoxAndItemList } = usePackedBoxAndItemListStore();
-  const { modelList, setModelList } = useModelStore();
-  const { boxList, setBoxList } = useBoxStore();
+  const { modelList, setModelList } = useModelStateStore();
+  const { boxList, setBoxList } = useBoxStateStore();
   const { activeIndex } = useActiveIndexStore();
   const boxSizeList = packedBoxAndItemList.map(
     (boxAndItem) => boxAndItem.boxSize[1],
@@ -25,7 +27,7 @@ function PackedItems() {
     (boxAndItem) => boxAndItem.itemList,
   );
 
-  function calculateRotationType(rotationType) {
+  function calculateRotationType(rotationType: number): Model["rotation"] {
     const rotation = Math.PI / 2;
     switch (rotationType) {
       case 0:
@@ -51,7 +53,7 @@ function PackedItems() {
         const itemUrl = `${import.meta.env.VITE_ITEM_URL}/${item.itemName}.glb`;
         const position = item.position.map((value) => {
           return value / 100;
-        });
+        }) as Model["position"];
         position[2] += index * 5.5;
         const glbModel = await loader.loadAsync(itemUrl);
         const scene = glbModel.scene;
@@ -67,12 +69,12 @@ function PackedItems() {
   useEffect(() => {
     boxSizeList.forEach(async (boxSize, index) => {
       const boxUrl = import.meta.env.VITE_PACKED_BOX_ITEM;
-      const scale = [
+      const scale: Model["scale"] = [
         boxSize[0] / BOX_SIZE.w,
         boxSize[1] / BOX_SIZE.h,
         boxSize[2] / BOX_SIZE.d,
       ];
-      const position = [0, 0, index * 5.5];
+      const position: Model["position"] = [0, 0, index * 5.5];
       const glbModel = await loader.loadAsync(boxUrl);
       const scene = glbModel.scene;
 

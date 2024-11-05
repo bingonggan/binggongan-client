@@ -1,6 +1,9 @@
 import { create } from "zustand";
+import type * as stateTypes from "./stateTypes";
 
-const useItemStateStore = create((set) => ({
+const useItemStateStore = create<
+  stateTypes.ItemState & stateTypes.ItemStateAction
+>((set) => ({
   isOpen: false,
   itemName: "",
   itemTitle: "",
@@ -25,7 +28,9 @@ const useItemStateStore = create((set) => ({
   setInitItemD: (initItemD) => set({ initItemD }),
 }));
 
-const useCustomizedItemListStore = create((set) => ({
+const useCustomizedItemListStore = create<
+  stateTypes.CustomizedItemList & stateTypes.CustomizedItemListAction
+>((set) => ({
   customizedItemList: [],
   addCustomizedItemList: (item) =>
     set((state) => ({
@@ -40,7 +45,9 @@ const useCustomizedItemListStore = create((set) => ({
   initiateCustomizedItemList: () => set(() => ({ customizedItemList: [] })),
 }));
 
-const usePackedBoxAndItemListStore = create((set) => ({
+const usePackedBoxAndItemListStore = create<
+  stateTypes.PackedBoxAndItemList & stateTypes.PackedBoxAndItemListAction
+>((set) => ({
   packedBoxAndItemList: [],
   isPacked: false,
   setPackedBoxAndItemList: (packedBoxAndItemList) =>
@@ -48,20 +55,26 @@ const usePackedBoxAndItemListStore = create((set) => ({
   setIsPacked: (isPacked) => set({ isPacked }),
 }));
 
-const useModelStore = create((set) => ({
+const useModelStateStore = create<
+  stateTypes.ModelState & stateTypes.ModelAction
+>((set) => ({
   modelList: [],
   setModelList: (model) =>
     set((state) => ({ modelList: [...state.modelList, model] })),
   initiateModelList: () => set({ modelList: [] }),
 }));
 
-const useBoxStore = create((set) => ({
-  boxList: [],
-  setBoxList: (box) => set((state) => ({ boxList: [...state.boxList, box] })),
-  initiateBoxList: () => set({ boxList: [] }),
-}));
+const useBoxStateStore = create<stateTypes.BoxState & stateTypes.BoxAction>(
+  (set) => ({
+    boxList: [],
+    setBoxList: (box) => set((state) => ({ boxList: [...state.boxList, box] })),
+    initiateBoxList: () => set({ boxList: [] }),
+  }),
+);
 
-const useActiveIndexStore = create((set) => ({
+const useActiveIndexStore = create<
+  stateTypes.ActiveIndex & stateTypes.ActiveIndexAction
+>((set) => ({
   activeIndex: null,
   setActiveIndex: (activeIndex) => set({ activeIndex }),
 }));
@@ -70,7 +83,7 @@ export {
   useItemStateStore,
   useCustomizedItemListStore,
   usePackedBoxAndItemListStore,
-  useModelStore,
-  useBoxStore,
+  useModelStateStore,
+  useBoxStateStore,
   useActiveIndexStore,
 };

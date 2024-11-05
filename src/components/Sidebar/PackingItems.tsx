@@ -8,8 +8,8 @@ import {
   useCustomizedItemListStore,
   usePackedBoxAndItemListStore,
   useActiveIndexStore,
-  useModelStore,
-  useBoxStore,
+  useModelStateStore,
+  useBoxStateStore,
 } from "../../store";
 
 const Container = styled.div`
@@ -21,8 +21,8 @@ function PackingItems() {
     useCustomizedItemListStore();
   const { setPackedBoxAndItemList, setIsPacked, isPacked } =
     usePackedBoxAndItemListStore();
-  const { initiateModelList } = useModelStore();
-  const { initiateBoxList } = useBoxStore();
+  const { initiateModelList } = useModelStateStore();
+  const { initiateBoxList } = useBoxStateStore();
   const { setActiveIndex } = useActiveIndexStore();
 
   async function handlePacking() {
@@ -92,7 +92,10 @@ function PackingItems() {
           onClick={handlePacking}
           message={"포장하기"}
           fontSize={"1.5rem"}
-          packing
+          backgroundColor={null}
+          hoverBackgroundColor={null}
+          activeBackgroundColor={null}
+          packing={false}
         />
       )}
       <ToastContainer />
