@@ -85,10 +85,6 @@ function ItemToolTip() {
       return;
     }
 
-    if (isItemListFull) {
-      return;
-    }
-
     addCustomizedItemList({
       itemName,
       itemTitle,
