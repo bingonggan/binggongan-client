@@ -95,7 +95,7 @@ function PackingItems() {
           backgroundColor={null}
           hoverBackgroundColor={null}
           activeBackgroundColor={null}
-          packing={false}
+          packing
         />
       )}
       <ToastContainer />
