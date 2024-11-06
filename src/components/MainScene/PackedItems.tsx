@@ -110,7 +110,7 @@ function PackedItems() {
                 child.userData.originalMaterial = child.material.clone();
               }
 
-              if (model.originalIndex == activeIndex) {
+              if (model.originalIndex === activeIndex) {
                 child.material = new THREE.MeshStandardMaterial({
                   color: 0x00ff00,
                 });
