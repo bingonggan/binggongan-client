@@ -2,7 +2,8 @@
   "compilerOptions": {
     "module": "ES2022",
     "moduleResolution": "Node",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "noImplicitAny": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "*.ts", "*.tsx"]
 }
