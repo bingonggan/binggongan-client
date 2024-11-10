@@ -5,20 +5,27 @@ import styled from "styled-components";
 
 import Button from "../common/Button";
 import {
-  useCustomizedItemListStore,
   usePackedBoxAndItemListStore,
   useActiveIndexStore,
   useModelStateStore,
   useBoxStateStore,
 } from "../../store";
 
+import type { CustomizedItem } from "../../stateTypes";
+
 const Container = styled.div`
   width: 100%;
 `;
 
-function PackingItems() {
-  const { customizedItemList, initiateCustomizedItemList } =
-    useCustomizedItemListStore();
+type PropsType = {
+  customizedItemList: CustomizedItem[];
+  setCustomizedItemList: React.Dispatch<React.SetStateAction<CustomizedItem[]>>;
+};
+
+function PackingItems({
+  customizedItemList,
+  setCustomizedItemList,
+}: PropsType) {
   const { setPackedBoxAndItemList, setIsPacked, isPacked } =
     usePackedBoxAndItemListStore();
   const { initiateModelList } = useModelStateStore();
@@ -26,6 +33,11 @@ function PackingItems() {
   const { setActiveIndex } = useActiveIndexStore();
 
   async function handlePacking() {
+    if (customizedItemList.length === 0) {
+      toast(`아이템을 추가해 주세요`);
+      return;
+    }
+
     const items = customizedItemList.map((item, index) => {
       return {
         itemName: item.itemName,
@@ -68,7 +80,7 @@ function PackingItems() {
   }
 
   function initiatePacking() {
-    initiateCustomizedItemList();
+    setCustomizedItemList([]);
     initiateModelList();
     initiateBoxList();
     setIsPacked(false);

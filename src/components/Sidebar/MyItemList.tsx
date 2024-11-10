@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { useRef, useEffect } from "react";
 
-import {
-  useCustomizedItemListStore,
-  useActiveIndexStore,
-  usePackedBoxAndItemListStore,
-} from "../../store";
+import { useActiveIndexStore, usePackedBoxAndItemListStore } from "../../store";
 import Button from "../common/Button";
+
+import type { CustomizedItem } from "../../stateTypes";
 
 const TitleContainer = styled.div`
   height: 10%;
@@ -48,9 +46,12 @@ const ItemExplainContainer = styled.span`
   padding: 0.5rem;
 `;
 
-function MyItemList() {
-  const { customizedItemList, deleteCustomizedItemList } =
-    useCustomizedItemListStore();
+type PropsType = {
+  customizedItemList: CustomizedItem[];
+  setCustomizedItemList: React.Dispatch<React.SetStateAction<CustomizedItem[]>>;
+};
+
+function MyItemList({ customizedItemList, setCustomizedItemList }: PropsType) {
   const { setActiveIndex } = useActiveIndexStore();
   const { isPacked } = usePackedBoxAndItemListStore();
 
@@ -60,8 +61,14 @@ function MyItemList() {
     itemListEndRef.current.scrollIntoView({ behavior: "smooth" });
   }, [customizedItemList]);
 
-  function activateItem(index) {
+  function activateItem(index: number): void {
     setActiveIndex(index);
+  }
+
+  function handleDelete(selectIndex: number) {
+    setCustomizedItemList(
+      customizedItemList.filter((_, index) => index !== selectIndex),
+    );
   }
 
   return (
@@ -81,7 +88,7 @@ function MyItemList() {
               <ItemExplainContainer>{`${index + 1}. ${item.itemTitle}`}</ItemExplainContainer>
               <Button
                 message={"삭제"}
-                onClick={() => deleteCustomizedItemList(index)}
+                onClick={() => handleDelete(index)}
                 fontSize={"0.6em"}
                 backgroundColor={"#5e5470"}
                 hoverBackgroundColor={"#322e38"}

@@ -4,10 +4,12 @@ import styled from "styled-components";
 import NumberInput from "../common/NumberInput";
 import TextInput from "../common/TextInput";
 import Button from "../common/Button";
-import { useItemStateStore, useCustomizedItemListStore } from "../../store";
+
+import type { ItemState, CustomizedItem } from "../../stateTypes";
 
 const ItemToolTipContainer = styled.div`
   position: absolute;
+  margin-left: 400px;
   z-index: 1;
   gap: 1rem;
   padding: 2rem;
@@ -53,51 +55,52 @@ const ValidationMessageContainer = styled.div`
   text-align: center;
 `;
 
-function ItemToolTip() {
-  const {
-    itemName,
-    itemTitle,
-    initItemW,
-    initItemH,
-    initItemD,
-    loadBear,
-    itemW,
-    itemH,
-    itemD,
-    setItemW,
-    setItemH,
-    setItemD,
-    setItemTitle,
-    setIsOpen,
-  } = useItemStateStore();
-  const { addCustomizedItemList, customizedItemList } =
-    useCustomizedItemListStore();
+type propsType = {
+  itemState: ItemState;
+  setIsToolTipOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  customizedItemList: CustomizedItem[];
+  setCustomizedItemList: React.Dispatch<React.SetStateAction<CustomizedItem[]>>;
+};
+
+function ItemToolTip({
+  itemState,
+  setIsToolTipOpen,
+  customizedItemList,
+  setCustomizedItemList,
+}: propsType) {
   const [isValid, setIsValid] = useState(true);
+  const [itemW, setItemW] = useState(itemState.initItemW);
+  const [itemH, setItemH] = useState(itemState.initItemH);
+  const [itemD, setItemD] = useState(itemState.initItemD);
+  const [itemTitle, setItemTitle] = useState(itemState.initItemTitle);
 
   const isItemListFull = customizedItemList.length >= 15;
-
-  const itemScaleW = itemW / initItemW;
-  const itemScaleH = itemH / initItemH;
-  const itemScaleD = itemD / initItemD;
 
   function registerItem() {
     if (!isValid || isItemListFull) {
       return;
     }
 
-    addCustomizedItemList({
-      itemName,
-      itemTitle,
-      itemScaleW,
-      itemScaleH,
-      itemScaleD,
-      itemW,
-      itemH,
-      itemD,
-      loadBear,
-    });
+    const itemScaleW = itemW / itemState.initItemW;
+    const itemScaleH = itemH / itemState.initItemH;
+    const itemScaleD = itemD / itemState.initItemD;
 
-    setIsOpen(false);
+    setCustomizedItemList([
+      ...customizedItemList,
+      {
+        itemName: itemState.itemName,
+        itemTitle,
+        itemScaleW,
+        itemScaleH,
+        itemScaleD,
+        itemW,
+        itemH,
+        itemD,
+        loadBear: itemState.loadBear,
+      },
+    ]);
+
+    setIsToolTipOpen(false);
   }
 
   return (
@@ -144,7 +147,7 @@ function ItemToolTip() {
         <ButtonsContainer>
           <Button
             message={"취소"}
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsToolTipOpen(false)}
             fontSize={"1rem"}
             backgroundColor={"#5e5470"}
             hoverBackgroundColor={"#322e38"}

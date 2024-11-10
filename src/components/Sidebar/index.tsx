@@ -1,11 +1,15 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import PresetItemList from "./PresetItemList";
 import MyItemList from "./MyItemList";
 import PackingItems from "./PackingItems";
+import ItemToolTip from "./ItemToolTip";
+
+import { ItemState, CustomizedItem } from "../../stateTypes";
 
 const SidebarContainer = styled.div`
-  width: 400px;
+  min-width: 400px;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -29,20 +33,43 @@ const PackingItemsContainer = styled.div`
 `;
 
 function Sidebar() {
+  const [itemState, setItemState] = useState<ItemState>();
+  const [customizedItemList, setCustomizedItemList] = useState<
+    CustomizedItem[]
+  >([]);
+  const [isToolTipOpen, setIsToolTipOpen] = useState(false);
+
   return (
     <SidebarContainer>
       <TitleContainer>
         <img src="logo.png" alt="빈공간 로고" />
       </TitleContainer>
       <PresetItemListContainer>
-        <PresetItemList />
+        <PresetItemList
+          setItemState={setItemState}
+          setIsToolTipOpen={setIsToolTipOpen}
+        />
       </PresetItemListContainer>
       <AddedItemListContainer>
-        <MyItemList />
+        <MyItemList
+          customizedItemList={customizedItemList}
+          setCustomizedItemList={setCustomizedItemList}
+        />
       </AddedItemListContainer>
       <PackingItemsContainer>
-        <PackingItems />
+        <PackingItems
+          customizedItemList={customizedItemList}
+          setCustomizedItemList={setCustomizedItemList}
+        />
       </PackingItemsContainer>
+      {isToolTipOpen && (
+        <ItemToolTip
+          itemState={itemState}
+          setIsToolTipOpen={setIsToolTipOpen}
+          customizedItemList={customizedItemList}
+          setCustomizedItemList={setCustomizedItemList}
+        />
+      )}
     </SidebarContainer>
   );
 }

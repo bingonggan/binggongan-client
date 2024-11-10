@@ -4,8 +4,7 @@ import { OrbitControls } from "@react-three/drei";
 
 import BoxItem from "./BoxItem";
 import PackedItems from "./PackedItems";
-import ItemToolTip from "./ItemToolTip";
-import { usePackedBoxAndItemListStore, useItemStateStore } from "../../store";
+import { usePackedBoxAndItemListStore } from "../../store";
 
 const MainSceneContainer = styled.div`
   width: calc(100% - 400px);
@@ -23,7 +22,6 @@ const CanvasContainer = styled.div`
 
 function MainScene() {
   const { isPacked } = usePackedBoxAndItemListStore();
-  const { isOpen } = useItemStateStore();
 
   return (
     <MainSceneContainer>
@@ -40,7 +38,6 @@ function MainScene() {
             <BoxItem position={[0, 0, 0]} />
             <OrbitControls enablePan={false} maxDistance={50} />
           </Canvas>
-          {isOpen && <ItemToolTip />}
         </CanvasContainer>
       )}
     </MainSceneContainer>

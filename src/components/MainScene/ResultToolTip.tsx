@@ -67,7 +67,11 @@ function ResultToolTip() {
 
   return isResultToolTipOpen ? (
     <ResultToolTipContainer onClick={handleModalClose}>
-      <ResultModal onClick={(event) => event.stopPropagation()}>
+      <ResultModal
+        onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) =>
+          e.stopPropagation()
+        }
+      >
         <span className="modal-title-message">
           우체국 박스 <strong>{boxSize}</strong>로 포장되었습니다.
         </span>

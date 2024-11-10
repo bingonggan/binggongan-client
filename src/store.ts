@@ -1,50 +1,6 @@
 import { create } from "zustand";
 import type * as stateTypes from "./stateTypes";
 
-const useItemStateStore = create<
-  stateTypes.ItemState & stateTypes.ItemStateAction
->((set) => ({
-  isOpen: false,
-  itemName: "",
-  itemTitle: "",
-  itemUrl: null,
-  itemW: 0,
-  itemH: 0,
-  itemD: 0,
-  loadBear: 0,
-  initItemW: 0,
-  initItemH: 0,
-  initItemD: 0,
-  setItemName: (itemName) => set({ itemName }),
-  setItemTitle: (itemTitle) => set({ itemTitle }),
-  setIsOpen: (isOpen) => set({ isOpen }),
-  setItemUrl: (itemUrl) => set({ itemUrl }),
-  setItemW: (itemW) => set({ itemW }),
-  setItemH: (itemH) => set({ itemH }),
-  setItemD: (itemD) => set({ itemD }),
-  setLoadBear: (loadBear) => set({ loadBear }),
-  setInitItemW: (initItemW) => set({ initItemW }),
-  setInitItemH: (initItemH) => set({ initItemH }),
-  setInitItemD: (initItemD) => set({ initItemD }),
-}));
-
-const useCustomizedItemListStore = create<
-  stateTypes.CustomizedItemList & stateTypes.CustomizedItemListAction
->((set) => ({
-  customizedItemList: [],
-  addCustomizedItemList: (item) =>
-    set((state) => ({
-      customizedItemList: [...state.customizedItemList, item],
-    })),
-  deleteCustomizedItemList: (itemIndex) =>
-    set((state) => ({
-      customizedItemList: state.customizedItemList.filter(
-        (_, index) => itemIndex !== index,
-      ),
-    })),
-  initiateCustomizedItemList: () => set(() => ({ customizedItemList: [] })),
-}));
-
 const usePackedBoxAndItemListStore = create<
   stateTypes.PackedBoxAndItemList & stateTypes.PackedBoxAndItemListAction
 >((set) => ({
@@ -80,8 +36,6 @@ const useActiveIndexStore = create<
 }));
 
 export {
-  useItemStateStore,
-  useCustomizedItemListStore,
   usePackedBoxAndItemListStore,
   useModelStateStore,
   useBoxStateStore,

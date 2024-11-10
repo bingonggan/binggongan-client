@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-import { useItemStateStore } from "../../store";
 import { ITEM_LIST } from "../../constants";
+
+import { ItemState } from "../../stateTypes";
 
 const TitleContainer = styled.div`
   height: 10%;
@@ -41,21 +42,12 @@ const ItemImageContainer = styled.div`
 
 const ItemTitleContainer = styled.div``;
 
-function PresetItemList() {
-  const {
-    setIsOpen,
-    setItemName,
-    setItemTitle,
-    setItemUrl,
-    setItemW,
-    setItemH,
-    setItemD,
-    setLoadBear,
-    setInitItemW,
-    setInitItemH,
-    setInitItemD,
-  } = useItemStateStore();
+type PropsType = {
+  setItemState: React.Dispatch<React.SetStateAction<ItemState>>;
+  setIsToolTipOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
+function PresetItemList({ setItemState, setIsToolTipOpen }: PropsType) {
   return (
     <>
       <TitleContainer>아이템 리스트</TitleContainer>
@@ -63,27 +55,26 @@ function PresetItemList() {
         {ITEM_LIST.map((item, index) => {
           const itemName = Object.keys(item)[0];
           const itemUrl = `${import.meta.env.VITE_ITEM_URL}/${itemName}.glb`;
-          const itemTitle = item[itemName].title;
-          const itemW = item[itemName].w;
-          const itemH = item[itemName].h;
-          const itemD = item[itemName].d;
-          const itemLoadBear = item[itemName].loadBear;
+          const initItemTitle = item[itemName].title;
+          const initItemW = item[itemName].w;
+          const initItemH = item[itemName].h;
+          const initItemD = item[itemName].d;
+          const loadBear = item[itemName].loadBear;
 
           return (
             <ItemContainer
               key={index}
               onClick={() => {
-                setIsOpen(true);
-                setItemName(itemName);
-                setItemTitle(itemTitle);
-                setItemUrl(itemUrl);
-                setItemW(itemW);
-                setItemH(itemH);
-                setItemD(itemD);
-                setLoadBear(itemLoadBear);
-                setInitItemW(itemW);
-                setInitItemH(itemH);
-                setInitItemD(itemD);
+                setIsToolTipOpen(true);
+                setItemState({
+                  itemName,
+                  initItemTitle,
+                  itemUrl,
+                  initItemW,
+                  initItemH,
+                  initItemD,
+                  loadBear,
+                });
               }}
             >
               <ItemImageContainer>
@@ -94,7 +85,7 @@ function PresetItemList() {
                   alt={itemName}
                 />
               </ItemImageContainer>
-              <ItemTitleContainer>{itemTitle}</ItemTitleContainer>
+              <ItemTitleContainer>{initItemTitle}</ItemTitleContainer>
             </ItemContainer>
           );
         })}
