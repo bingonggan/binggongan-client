@@ -1,7 +1,12 @@
 import { useGLTF } from "@react-three/drei";
 import { Mesh } from "three";
 
-function BoxItem({ position, scale = [1, 1, 1] }) {
+type PropsType = {
+  position: [number, number, number];
+  scale?: [number, number, number];
+};
+
+function BoxItem({ position, scale = [1, 1, 1] }: PropsType) {
   const { scene } = useGLTF(import.meta.env.VITE_BOX_ITEM);
 
   scene.traverse((child) => {

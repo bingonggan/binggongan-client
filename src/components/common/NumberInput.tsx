@@ -21,9 +21,16 @@ const StyledInput = styled.input`
   }
 `;
 
-function NumberInput({ label, value, setValue, setIsValid }) {
-  function handleChange(e) {
-    const newValue = e.target.value;
+type PropsType = {
+  label: string;
+  value: number;
+  setValue: (value: number) => void;
+  setIsValid: (value: boolean) => void;
+};
+
+function NumberInput({ label, value, setValue, setIsValid }: PropsType) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const newValue = parseInt(e.target.value);
 
     if (newValue > 400 || newValue <= 0) {
       setIsValid(false);

@@ -1,21 +1,21 @@
 import styled from "styled-components";
 
-type ButtonState = {
+type PropsType = {
   onClick: () => void;
   message: string;
   fontSize: string;
-  backgroundColor: string | null;
-  hoverBackgroundColor: string | null;
-  activeBackgroundColor: string | null;
-  packing: Boolean | null;
+  backgroundColor?: string;
+  hoverBackgroundColor?: string;
+  activeBackgroundColor?: string;
+  packing?: Boolean;
 };
 
 type StyledButtonProps = {
   $packing: Boolean;
-  $backgroundColor: string | null;
-  $hoverBackgroundColor: string | null;
-  $activeBackgroundColor: string | null;
-  fontSize: string | null;
+  $backgroundColor?: string;
+  $hoverBackgroundColor?: string;
+  $activeBackgroundColor?: string;
+  fontSize?: string;
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
@@ -47,7 +47,7 @@ function Button({
   hoverBackgroundColor,
   activeBackgroundColor,
   packing,
-}: ButtonState) {
+}: PropsType) {
   return (
     <StyledButton
       onClick={onClick}

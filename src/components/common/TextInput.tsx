@@ -21,14 +21,22 @@ const StyledInput = styled.input`
   }
 `;
 
-function TextInput({ label, value, setValue }) {
+type PropsType = {
+  label: string;
+  value: string;
+  setValue: (value: string) => void;
+};
+
+function TextInput({ label, value, setValue }: PropsType) {
   return (
     <>
       <StyledLabel htmlFor={label}>{label}</StyledLabel>
       <StyledInput
         type="text"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setValue(e.target.value)
+        }
       />
     </>
   );

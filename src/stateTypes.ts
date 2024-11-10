@@ -1,37 +1,20 @@
 import { Group } from "three";
 
-export interface Item {
+export interface ItemState {
   itemName: string;
+  initItemTitle: string;
+  initItemW: number;
+  initItemH: number;
+  initItemD: number;
+  loadBear: number;
+  itemUrl: string;
+}
+
+export interface CustomizedItem extends Partial<ItemState> {
   itemTitle: string;
   itemW: number;
   itemH: number;
   itemD: number;
-  loadBear: number;
-}
-
-export interface ItemState extends Item {
-  isOpen: boolean;
-  itemUrl: string;
-  initItemW: number;
-  initItemH: number;
-  initItemD: number;
-}
-
-export type ItemStateAction = {
-  setItemName: (itemName: ItemState["itemName"]) => void;
-  setItemTitle: (itemTitle: ItemState["itemTitle"]) => void;
-  setIsOpen: (isOpen: ItemState["isOpen"]) => void;
-  setItemUrl: (itemUrl: ItemState["itemUrl"]) => void;
-  setItemW: (itemW: ItemState["itemW"]) => void;
-  setItemH: (itemH: ItemState["itemH"]) => void;
-  setItemD: (itemD: ItemState["itemD"]) => void;
-  setLoadBear: (loadBear: ItemState["loadBear"]) => void;
-  setInitItemW: (initItemW: ItemState["initItemW"]) => void;
-  setInitItemH: (initItemH: ItemState["initItemH"]) => void;
-  setInitItemD: (initItemD: ItemState["initItemD"]) => void;
-};
-
-export interface CustomizedItem extends Item {
   itemScaleW: number;
   itemScaleH: number;
   itemScaleD: number;
@@ -39,12 +22,6 @@ export interface CustomizedItem extends Item {
 
 export type CustomizedItemList = {
   customizedItemList: CustomizedItem[];
-};
-
-export type CustomizedItemListAction = {
-  addCustomizedItemList: (item: CustomizedItem) => void;
-  deleteCustomizedItemList: (itemIndex: Number) => void;
-  initiateCustomizedItemList: () => void;
 };
 
 type BoxSize = [string, [number, number, number]];

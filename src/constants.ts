@@ -1,10 +1,28 @@
-const BOX_SIZE = {
+type BoxSizeType = {
+  w: number;
+  h: number;
+  d: number;
+};
+
+type Item = {
+  title: string;
+  w: number;
+  h: number;
+  d: number;
+  loadBear: number;
+};
+
+type ItemList = {
+  [key: string]: Item;
+}[];
+
+const BOX_SIZE: BoxSizeType = {
   w: 520,
   h: 400,
   d: 480,
 };
 
-const ITEM_LIST = [
+const ITEM_LIST: ItemList = [
   {
     book: {
       title: "책",
