@@ -5,7 +5,7 @@ import NumberInput from "../common/NumberInput";
 import TextInput from "../common/TextInput";
 import Button from "../common/Button";
 
-import type { ItemState, CustomizedItem } from "../../stateTypes";
+import type { ItemState, CustomizedItem } from "../../types";
 
 const ItemToolTipContainer = styled.div`
   position: absolute;
@@ -55,7 +55,7 @@ const ValidationMessageContainer = styled.div`
   text-align: center;
 `;
 
-type propsType = {
+type PropsType = {
   itemState: ItemState;
   setIsToolTipOpen: React.Dispatch<React.SetStateAction<boolean>>;
   customizedItemList: CustomizedItem[];
@@ -67,7 +67,7 @@ function ItemToolTip({
   setIsToolTipOpen,
   customizedItemList,
   setCustomizedItemList,
-}: propsType) {
+}: PropsType) {
   const [isValid, setIsValid] = useState(true);
   const [itemW, setItemW] = useState(itemState.initItemW);
   const [itemH, setItemH] = useState(itemState.initItemH);

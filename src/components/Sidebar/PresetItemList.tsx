@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { ITEM_LIST } from "../../constants";
 
-import { ItemState } from "../../stateTypes";
+import { ItemState } from "../../types";
 
 const TitleContainer = styled.div`
   height: 10%;

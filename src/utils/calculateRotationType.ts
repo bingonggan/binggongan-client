@@ -1,8 +1,8 @@
-import type { Model } from "../stateTypes";
+import type { ItemModelType } from "../types";
 
 export default function calculateRotationType(
   rotationType: number,
-): Model["rotation"] {
+): ItemModelType["rotation"] {
   const rotation = Math.PI / 2;
   switch (rotationType) {
     case 0:

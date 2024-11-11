@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { useActiveIndexStore, usePackedBoxAndItemListStore } from "../../store";
 import Button from "../common/Button";
 
-import type { CustomizedItem } from "../../stateTypes";
+import type { CustomizedItem } from "../../types";
 
 const TitleContainer = styled.div`
   height: 10%;

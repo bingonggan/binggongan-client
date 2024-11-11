@@ -6,10 +6,10 @@ import MyItemList from "./MyItemList";
 import PackingItems from "./PackingItems";
 import ItemToolTip from "./ItemToolTip";
 
-import { ItemState, CustomizedItem } from "../../stateTypes";
+import { ItemState, CustomizedItem } from "../../types";
 
 const SidebarContainer = styled.div`
-  min-width: 400px;
+  width: 400px;
   padding: 16px;
   display: flex;
   flex-direction: column;

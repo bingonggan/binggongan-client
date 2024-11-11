@@ -20,13 +20,9 @@ export interface CustomizedItem extends Partial<ItemState> {
   itemScaleD: number;
 }
 
-export type CustomizedItemList = {
-  customizedItemList: CustomizedItem[];
-};
-
 type BoxSize = [string, [number, number, number]];
 
-type ResultItem = {
+type PackedItem = {
   itemIndex: number;
   itemName: string;
   itemScale: [number, number, number];
@@ -34,9 +30,9 @@ type ResultItem = {
   rotationType: number;
 };
 
-type PackedBoxAndItem = {
+export type PackedBoxAndItem = {
   boxSize: BoxSize;
-  itemList: ResultItem[];
+  itemList: PackedItem[];
 };
 
 export type PackedBoxAndItemList = {
@@ -51,7 +47,7 @@ export type PackedBoxAndItemListAction = {
   setIsPacked: (isPacked: PackedBoxAndItemList["isPacked"]) => void;
 };
 
-export type Model = {
+export type ItemModelType = {
   originalIndex: number;
   position: [number, number, number];
   rotation: [number, number, number];
@@ -59,28 +55,10 @@ export type Model = {
   scene: Group;
 };
 
-export type ModelState = {
-  modelList: Model[];
-};
-
-export type ModelAction = {
-  setModelList: (model: Model) => void;
-  initiateModelList: () => void;
-};
-
-type Box = {
+export type BoxModelType = {
   position: [number, number, number];
   scale: [number, number, number];
   scene: Group;
-};
-
-export type BoxState = {
-  boxList: Box[];
-};
-
-export type BoxAction = {
-  setBoxList: (box: Box) => void;
-  initiateBoxList: () => void;
 };
 
 export type ActiveIndex = {
