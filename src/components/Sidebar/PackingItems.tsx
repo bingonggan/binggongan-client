@@ -4,14 +4,9 @@ import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 
 import Button from "../common/Button";
-import {
-  usePackedBoxAndItemListStore,
-  useActiveIndexStore,
-  useModelStateStore,
-  useBoxStateStore,
-} from "../../store";
+import { usePackedBoxAndItemListStore, useActiveIndexStore } from "../../store";
 
-import type { CustomizedItem } from "../../stateTypes";
+import type { CustomizedItem } from "../../types";
 
 const Container = styled.div`
   width: 100%;
@@ -28,8 +23,6 @@ function PackingItems({
 }: PropsType) {
   const { setPackedBoxAndItemList, setIsPacked, isPacked } =
     usePackedBoxAndItemListStore();
-  const { initiateModelList } = useModelStateStore();
-  const { initiateBoxList } = useBoxStateStore();
   const { setActiveIndex } = useActiveIndexStore();
 
   async function handlePacking() {
@@ -81,8 +74,6 @@ function PackingItems({
 
   function initiatePacking() {
     setCustomizedItemList([]);
-    initiateModelList();
-    initiateBoxList();
     setIsPacked(false);
     setActiveIndex(null);
   }
