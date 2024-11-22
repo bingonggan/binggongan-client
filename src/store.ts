@@ -11,11 +11,11 @@ const usePackedBoxAndItemListStore = create<
   setIsPacked: (isPacked) => set({ isPacked }),
 }));
 
-const useActiveIndexStore = create<types.ActiveIndex & types.ActiveIndexAction>(
-  (set) => ({
-    activeIndex: null,
-    setActiveIndex: (activeIndex) => set({ activeIndex }),
-  }),
-);
+const useSelectedIndexStore = create<
+  types.SelectedIndex & types.selectedIndexAction
+>((set) => ({
+  selectedIndex: null,
+  setSelectedIndex: (selectedIndex) => set({ selectedIndex }),
+}));
 
-export { usePackedBoxAndItemListStore, useActiveIndexStore };
+export { usePackedBoxAndItemListStore, useSelectedIndexStore };

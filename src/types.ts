@@ -48,7 +48,7 @@ export type PackedBoxAndItemListAction = {
 };
 
 export type ItemModelType = {
-  originalIndex: number;
+  itemId: number;
   position: [number, number, number];
   rotation: [number, number, number];
   scale: [number, number, number];
@@ -61,10 +61,10 @@ export type BoxModelType = {
   scene: Group;
 };
 
-export type ActiveIndex = {
-  activeIndex: Number;
+export type SelectedIndex = {
+  selectedIndex: Number;
 };
 
-export type ActiveIndexAction = {
-  setActiveIndex: (activeIndex: ActiveIndex["activeIndex"]) => void;
+export type selectedIndexAction = {
+  setSelectedIndex: (selectedIndex: SelectedIndex["selectedIndex"]) => void;
 };

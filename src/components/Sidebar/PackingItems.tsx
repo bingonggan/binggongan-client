@@ -4,7 +4,10 @@ import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 
 import Button from "../common/Button";
-import { usePackedBoxAndItemListStore, useActiveIndexStore } from "../../store";
+import {
+  usePackedBoxAndItemListStore,
+  useSelectedIndexStore,
+} from "../../store";
 
 import type { CustomizedItem } from "../../types";
 
@@ -23,11 +26,11 @@ function PackingItems({
 }: PropsType) {
   const { setPackedBoxAndItemList, setIsPacked, isPacked } =
     usePackedBoxAndItemListStore();
-  const { setActiveIndex } = useActiveIndexStore();
+  const { setSelectedIndex } = useSelectedIndexStore();
 
   async function handlePacking() {
     if (customizedItemList.length === 0) {
-      toast(`아이템을 추가해 주세요`);
+      toast("아이템을 추가해 주세요`");
       return;
     }
 
@@ -68,14 +71,14 @@ function PackingItems({
       setPackedBoxAndItemList(packedBoxAndItemList);
       setIsPacked(true);
     } catch (error) {
-      toast(`아이템을 추가해 주세요`);
+      toast("아이템을 추가해 주세요");
     }
   }
 
   function initiatePacking() {
     setCustomizedItemList([]);
     setIsPacked(false);
-    setActiveIndex(null);
+    setSelectedIndex(null);
   }
 
   return (

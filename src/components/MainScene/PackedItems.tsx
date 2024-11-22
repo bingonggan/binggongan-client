@@ -5,7 +5,10 @@ import { OrbitControls } from "@react-three/drei";
 
 import ResultToolTip from "./ResultToolTip";
 
-import { usePackedBoxAndItemListStore, useActiveIndexStore } from "../../store";
+import {
+  usePackedBoxAndItemListStore,
+  useSelectedIndexStore,
+} from "../../store";
 
 import loadItemModels from "../../utils/loadItemModels";
 import loadBoxModels from "../../utils/loadBoxModels";
@@ -14,7 +17,7 @@ import type { ItemModelType, BoxModelType } from "../../types";
 
 function PackedItems() {
   const { packedBoxAndItemList } = usePackedBoxAndItemListStore();
-  const { activeIndex } = useActiveIndexStore();
+  const { selectedIndex } = useSelectedIndexStore();
 
   const [itemModelList, setItemModelList] = useState<ItemModelType[]>();
   const [boxModelList, setBoxModelList] = useState<BoxModelType[]>();
@@ -70,7 +73,7 @@ function PackedItems() {
                   child.userData.originalMaterial = child.material.clone();
                 }
 
-                if (model.originalIndex === activeIndex) {
+                if (model.itemId === selectedIndex) {
                   child.material = new THREE.MeshStandardMaterial({
                     color: 0x00ff00,
                   });

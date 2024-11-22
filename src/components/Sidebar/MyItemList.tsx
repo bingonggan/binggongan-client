@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { useRef, useEffect } from "react";
 
-import { useActiveIndexStore, usePackedBoxAndItemListStore } from "../../store";
+import {
+  useSelectedIndexStore,
+  usePackedBoxAndItemListStore,
+} from "../../store";
 import Button from "../common/Button";
 
 import type { CustomizedItem } from "../../types";
@@ -52,7 +55,7 @@ type PropsType = {
 };
 
 function MyItemList({ customizedItemList, setCustomizedItemList }: PropsType) {
-  const { setActiveIndex } = useActiveIndexStore();
+  const { setSelectedIndex } = useSelectedIndexStore();
   const { isPacked } = usePackedBoxAndItemListStore();
 
   const itemListEndRef = useRef(null);
@@ -62,7 +65,7 @@ function MyItemList({ customizedItemList, setCustomizedItemList }: PropsType) {
   }, [customizedItemList]);
 
   function activateItem(index: number): void {
-    setActiveIndex(index);
+    setSelectedIndex(index);
   }
 
   function handleDelete(selectIndex: number) {
