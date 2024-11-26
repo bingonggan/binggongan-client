@@ -24,27 +24,38 @@ const StyledInput = styled.input`
 type PropsType = {
   label: string;
   value: number;
-  setValue: (value: number) => void;
-  setIsValid: (value: boolean) => void;
+  onChange: (value: number) => void;
+  updateValidity: (value: boolean) => void;
 };
 
-function NumberInput({ label, value, setValue, setIsValid }: PropsType) {
+function NumberInput({
+  label,
+  value,
+  onChange,
+  updateValidity,
+  ...rest
+}: PropsType) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newValue = parseInt(e.target.value);
 
     if (newValue > 400 || newValue <= 0) {
-      setIsValid(false);
+      updateValidity(false);
     } else {
-      setIsValid(true);
+      updateValidity(true);
     }
 
-    setValue(newValue);
+    onChange(newValue);
   }
 
   return (
     <>
       <StyledLabel htmlFor={label}>{label}</StyledLabel>
-      <StyledInput type="number" value={value} onChange={handleChange} />
+      <StyledInput
+        type="number"
+        value={value}
+        onChange={handleChange}
+        {...rest}
+      />
     </>
   );
 }
