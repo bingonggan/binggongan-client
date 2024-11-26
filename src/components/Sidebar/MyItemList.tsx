@@ -50,11 +50,11 @@ const ItemExplainContainer = styled.span`
 `;
 
 type PropsType = {
-  customizedItemList: CustomizedItem[];
-  setCustomizedItemList: React.Dispatch<React.SetStateAction<CustomizedItem[]>>;
+  itemList: CustomizedItem[];
+  changeItemList: React.Dispatch<React.SetStateAction<CustomizedItem[]>>;
 };
 
-function MyItemList({ customizedItemList, setCustomizedItemList }: PropsType) {
+function MyItemList({ itemList, changeItemList }: PropsType) {
   const { setSelectedIndex } = useSelectedIndexStore();
   const { isPacked } = usePackedBoxAndItemListStore();
 
@@ -62,23 +62,21 @@ function MyItemList({ customizedItemList, setCustomizedItemList }: PropsType) {
 
   useEffect(() => {
     itemListEndRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [customizedItemList]);
+  }, [itemList]);
 
   function activateItem(index: number): void {
     setSelectedIndex(index);
   }
 
   function handleDelete(selectIndex: number) {
-    setCustomizedItemList(
-      customizedItemList.filter((_, index) => index !== selectIndex),
-    );
+    changeItemList(itemList.filter((_, index) => index !== selectIndex));
   }
 
   return (
     <>
       <TitleContainer>내 아이템</TitleContainer>
       <ListContainer>
-        {customizedItemList.map((item, index) => {
+        {itemList.map((item, index) => {
           return isPacked ? (
             <PackedItemContainer
               onClick={() => activateItem(index)}

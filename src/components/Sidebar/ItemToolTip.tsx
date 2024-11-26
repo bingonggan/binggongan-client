@@ -113,25 +113,25 @@ function ItemToolTip({
           <NumberInput
             label={"길이(mm)"}
             value={itemW}
-            setValue={setItemW}
-            setIsValid={setIsValid}
+            onChange={setItemW}
+            updateValidity={setIsValid}
           />
           <NumberInput
             label={"높이(mm)"}
             value={itemH}
-            setValue={setItemH}
-            setIsValid={setIsValid}
+            onChange={setItemH}
+            updateValidity={setIsValid}
           />
           <NumberInput
             label={"너비(mm)"}
             value={itemD}
-            setValue={setItemD}
-            setIsValid={setIsValid}
+            onChange={setItemD}
+            updateValidity={setIsValid}
           />
           <TextInput
             label={"아이템 이름"}
             value={itemTitle}
-            setValue={setItemTitle}
+            onChange={setItemTitle}
           />
         </InputContainer>
         {!isValid && (
