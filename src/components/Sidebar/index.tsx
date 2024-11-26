@@ -25,11 +25,9 @@ const PresetItemListContainer = styled.div`
 `;
 
 const AddedItemListContainer = styled.div`
-  height: 40vh;
-`;
-
-const PackingItemsContainer = styled.div`
-  height: 10vh;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 function Sidebar() {
@@ -52,16 +50,14 @@ function Sidebar() {
       </PresetItemListContainer>
       <AddedItemListContainer>
         <MyItemList
-          customizedItemList={customizedItemList}
-          setCustomizedItemList={setCustomizedItemList}
+          itemList={customizedItemList}
+          changeItemList={setCustomizedItemList}
+        />
+        <PackingItems
+          itemList={customizedItemList}
+          changeItemList={setCustomizedItemList}
         />
       </AddedItemListContainer>
-      <PackingItemsContainer>
-        <PackingItems
-          customizedItemList={customizedItemList}
-          setCustomizedItemList={setCustomizedItemList}
-        />
-      </PackingItemsContainer>
       {isToolTipOpen && (
         <ItemToolTip
           itemState={itemState}
