@@ -62,7 +62,7 @@ export type BoxModelType = {
 };
 
 export type SelectedIndex = {
-  selectedIndex: Number;
+  selectedIndex: Number | null;
 };
 
 export type selectedIndexAction = {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import PresetItemList from "./PresetItemList";
 import MyItemList from "./MyItemList";
 import PackingItems from "./PackingItems";
-import ItemInputField from "./itemInputField";
+import ItemInputField from "./ItemInputField";
 
 import { ItemState, CustomizedItem } from "../../types";
 
@@ -31,7 +31,15 @@ const AddedItemListContainer = styled.div`
 `;
 
 function Sidebar() {
-  const [itemState, setItemState] = useState<ItemState>();
+  const [itemState, setItemState] = useState<ItemState>({
+    itemName: "",
+    initItemTitle: "",
+    initItemD: 0,
+    initItemH: 0,
+    initItemW: 0,
+    itemUrl: "",
+    loadBear: 0,
+  });
   const [customizedItemList, setCustomizedItemList] = useState<
     CustomizedItem[]
   >([]);

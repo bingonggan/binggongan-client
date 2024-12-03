@@ -43,8 +43,8 @@ const ItemImageContainer = styled.div`
 const ItemTitleContainer = styled.div``;
 
 type PropsType = {
-  setItemState: React.Dispatch<React.SetStateAction<ItemState>>;
-  setIsToolTipOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setItemState: (itemState: ItemState) => void;
+  setIsToolTipOpen: (prop: boolean) => void;
 };
 
 function PresetItemList({ setItemState, setIsToolTipOpen }: PropsType) {

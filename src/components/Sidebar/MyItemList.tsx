@@ -58,10 +58,12 @@ function MyItemList({ itemList, changeItemList }: PropsType) {
   const { setSelectedIndex } = useSelectedIndexStore();
   const { isPacked } = usePackedBoxAndItemListStore();
 
-  const itemListEndRef = useRef(null);
+  const itemListEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    itemListEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (itemListEndRef.current) {
+      itemListEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [itemList]);
 
   function activateItem(index: number): void {
