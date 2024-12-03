@@ -30,17 +30,21 @@ function PackedItems() {
   );
 
   useEffect(() => {
-    (async function () {
+    async function fetchItemModel() {
       const allItemModel = await loadItemModels(itemLists);
       setItemModelList(allItemModel);
-    })();
+    }
+
+    fetchItemModel();
   }, []);
 
   useEffect(() => {
-    (async function () {
+    async function fetchBoxModel() {
       const allBoxModel = await loadBoxModels(boxSizeList);
       setBoxModelList(allBoxModel);
-    })();
+    }
+
+    fetchBoxModel();
   }, []);
 
   return (
