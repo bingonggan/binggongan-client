@@ -4,7 +4,7 @@ import styled from "styled-components";
 import PresetItemList from "./PresetItemList";
 import MyItemList from "./MyItemList";
 import PackingItems from "./PackingItems";
-import ItemToolTip from "./ItemToolTip";
+import ItemInputField from "./itemInputField";
 
 import { ItemState, CustomizedItem } from "../../types";
 
@@ -35,7 +35,7 @@ function Sidebar() {
   const [customizedItemList, setCustomizedItemList] = useState<
     CustomizedItem[]
   >([]);
-  const [isToolTipOpen, setIsToolTipOpen] = useState(false);
+  const [isItemInputFieldOpen, setIsItemInputFieldOpen] = useState(false);
 
   return (
     <SidebarContainer>
@@ -45,7 +45,7 @@ function Sidebar() {
       <PresetItemListContainer>
         <PresetItemList
           setItemState={setItemState}
-          setIsToolTipOpen={setIsToolTipOpen}
+          setIsToolTipOpen={setIsItemInputFieldOpen}
         />
       </PresetItemListContainer>
       <AddedItemListContainer>
@@ -58,10 +58,10 @@ function Sidebar() {
           changeItemList={setCustomizedItemList}
         />
       </AddedItemListContainer>
-      {isToolTipOpen && (
-        <ItemToolTip
+      {isItemInputFieldOpen && (
+        <ItemInputField
           itemState={itemState}
-          setIsToolTipOpen={setIsToolTipOpen}
+          setIsItemInputFieldOpen={setIsItemInputFieldOpen}
           customizedItemList={customizedItemList}
           setCustomizedItemList={setCustomizedItemList}
         />

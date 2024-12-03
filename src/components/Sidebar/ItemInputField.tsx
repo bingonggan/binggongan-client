@@ -7,7 +7,7 @@ import Button from "../common/Button";
 
 import type { ItemState, CustomizedItem } from "../../types";
 
-const ItemToolTipContainer = styled.div`
+const ItemInputFieldContainer = styled.div`
   position: absolute;
   margin-left: 400px;
   z-index: 1;
@@ -57,14 +57,14 @@ const ValidationMessageContainer = styled.div`
 
 type PropsType = {
   itemState: ItemState;
-  setIsToolTipOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsItemInputFieldOpen: React.Dispatch<React.SetStateAction<boolean>>;
   customizedItemList: CustomizedItem[];
   setCustomizedItemList: React.Dispatch<React.SetStateAction<CustomizedItem[]>>;
 };
 
-function ItemToolTip({
+function ItemInputField({
   itemState,
-  setIsToolTipOpen,
+  setIsItemInputFieldOpen,
   customizedItemList,
   setCustomizedItemList,
 }: PropsType) {
@@ -96,11 +96,11 @@ function ItemToolTip({
       },
     ]);
 
-    setIsToolTipOpen(false);
+    setIsItemInputFieldOpen(false);
   }
 
   return (
-    <ItemToolTipContainer>
+    <ItemInputFieldContainer data-testId="item-tool-tip">
       <ControlContainer>
         <ExplainContainer>
           <span>아이템의 크기와 이름을 입력해 주세요</span>
@@ -143,7 +143,7 @@ function ItemToolTip({
         <ButtonsContainer>
           <Button
             message={"취소"}
-            onClick={() => setIsToolTipOpen(false)}
+            onClick={() => setIsItemInputFieldOpen(false)}
             fontSize={"1rem"}
             backgroundColor={"#5e5470"}
             hoverBackgroundColor={"#322e38"}
@@ -162,8 +162,8 @@ function ItemToolTip({
           />
         </ButtonsContainer>
       </ControlContainer>
-    </ItemToolTipContainer>
+    </ItemInputFieldContainer>
   );
 }
 
-export default ItemToolTip;
+export default ItemInputField;
