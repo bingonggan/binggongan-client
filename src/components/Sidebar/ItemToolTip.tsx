@@ -77,10 +77,6 @@ function ItemToolTip({
   const isItemListFull = customizedItemList.length >= 15;
 
   function registerItem() {
-    if (!isValid || isItemListFull) {
-      return;
-    }
-
     const itemScaleW = itemW / itemState.initItemW;
     const itemScaleH = itemH / itemState.initItemH;
     const itemScaleD = itemD / itemState.initItemD;
@@ -162,6 +158,7 @@ function ItemToolTip({
             hoverBackgroundColor={null}
             activeBackgroundColor={null}
             packing={true}
+            disabled={!isValid || isItemListFull}
           />
         </ButtonsContainer>
       </ControlContainer>
