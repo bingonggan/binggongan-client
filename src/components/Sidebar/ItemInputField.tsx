@@ -154,9 +154,6 @@ function ItemInputField({
             message={"추가"}
             fontSize={"1rem"}
             onClick={registerItem}
-            backgroundColor={null}
-            hoverBackgroundColor={null}
-            activeBackgroundColor={null}
             packing={true}
             disabled={!isValid || isItemListFull}
           />

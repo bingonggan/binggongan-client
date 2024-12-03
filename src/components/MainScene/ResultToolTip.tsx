@@ -80,10 +80,6 @@ function ResultToolTip() {
           <Button
             onClick={() => setIsResultToolTipOpen(false)}
             message={"확인"}
-            fontSize={null}
-            backgroundColor={null}
-            hoverBackgroundColor={null}
-            activeBackgroundColor={null}
             packing={false}
           />
         </ModalButtonContainer>

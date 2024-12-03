@@ -4,7 +4,7 @@ import styled from "styled-components";
 type PropsType = ButtonHTMLAttributes<HTMLButtonElement> & {
   onClick: () => void;
   message: string;
-  fontSize: string;
+  fontSize?: string;
   backgroundColor?: string;
   hoverBackgroundColor?: string;
   activeBackgroundColor?: string;
