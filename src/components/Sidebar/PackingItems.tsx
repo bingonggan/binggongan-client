@@ -27,7 +27,7 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
 
   async function handlePacking() {
     if (itemList.length === 0) {
-      toast("아이템을 추가해 주세요`");
+      toast("아이템을 추가해 주세요.");
       return;
     }
 
@@ -59,7 +59,8 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
       );
 
       if (!response.ok) {
-        throw new Error();
+        const { detail } = await response.json();
+        throw new Error(detail);
       }
 
       const jsonResponse = await response.json();
@@ -68,7 +69,10 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
       setPackedBoxAndItemList(packedBoxAndItemList);
       setIsPacked(true);
     } catch (error) {
-      toast("아이템을 추가해 주세요");
+      if (error instanceof Error) {
+        console.error(error.message);
+        toast("예상치 못한 에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      }
     }
   }
 
@@ -95,9 +99,6 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
           onClick={handlePacking}
           message={"포장하기"}
           fontSize={"1.5rem"}
-          backgroundColor={null}
-          hoverBackgroundColor={null}
-          activeBackgroundColor={null}
           packing
         />
       )}
