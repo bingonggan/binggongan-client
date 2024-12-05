@@ -53,7 +53,7 @@ function Sidebar() {
       <PresetItemListContainer>
         <PresetItemList
           setItemState={setItemState}
-          setIsToolTipOpen={setIsItemInputFieldOpen}
+          setIsItemInputFieldOpen={setIsItemInputFieldOpen}
         />
       </PresetItemListContainer>
       <AddedItemListContainer>
