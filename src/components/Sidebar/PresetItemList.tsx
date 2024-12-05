@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { ITEM_LIST } from "../../constants";
-
+import { usePackedBoxAndItemListStore } from "../../store";
 import { ItemState } from "../../types";
 
 const TitleContainer = styled.div`
@@ -44,14 +44,16 @@ const ItemTitleContainer = styled.div``;
 
 type PropsType = {
   setItemState: (itemState: ItemState) => void;
-  setIsToolTipOpen: (prop: boolean) => void;
+  setIsItemInputFieldOpen: (prop: boolean) => void;
 };
 
-function PresetItemList({ setItemState, setIsToolTipOpen }: PropsType) {
+function PresetItemList({ setItemState, setIsItemInputFieldOpen }: PropsType) {
+  const { isPacked } = usePackedBoxAndItemListStore();
+
   return (
     <>
       <TitleContainer>아이템 리스트</TitleContainer>
-      <ListContainer>
+      <ListContainer data-testid="item-list">
         {ITEM_LIST.map((item, index) => {
           const itemName = Object.keys(item)[0];
           const itemUrl = `${import.meta.env.VITE_ITEM_URL}/${itemName}.glb`;
@@ -61,22 +63,24 @@ function PresetItemList({ setItemState, setIsToolTipOpen }: PropsType) {
           const initItemD = item[itemName].d;
           const loadBear = item[itemName].loadBear;
 
+          function handleItemClick() {
+            if (!isPacked) {
+              setIsItemInputFieldOpen(true);
+            }
+
+            setItemState({
+              itemName,
+              initItemTitle,
+              itemUrl,
+              initItemW,
+              initItemH,
+              initItemD,
+              loadBear,
+            });
+          }
+
           return (
-            <ItemContainer
-              key={index}
-              onClick={() => {
-                setIsToolTipOpen(true);
-                setItemState({
-                  itemName,
-                  initItemTitle,
-                  itemUrl,
-                  initItemW,
-                  initItemH,
-                  initItemD,
-                  loadBear,
-                });
-              }}
-            >
+            <ItemContainer key={index} onClick={handleItemClick}>
               <ItemImageContainer>
                 <img
                   src={`${itemName}.svg`}
