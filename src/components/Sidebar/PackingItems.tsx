@@ -100,6 +100,7 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
           message={"포장하기"}
           fontSize={"1.5rem"}
           packing
+          data-testid="pack-button"
         />
       )}
       <ToastContainer />

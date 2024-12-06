@@ -100,7 +100,7 @@ function ItemInputField({
   }
 
   return (
-    <ItemInputFieldContainer data-testId="item-tool-tip">
+    <ItemInputFieldContainer data-testid="item-input-field">
       <ControlContainer>
         <ExplainContainer>
           <span>아이템의 크기와 이름을 입력해 주세요</span>
@@ -111,32 +111,36 @@ function ItemInputField({
             value={itemW}
             onChange={setItemW}
             updateValidity={setIsValid}
+            data-testid="item-width"
           />
           <NumberInput
             label={"높이(mm)"}
             value={itemH}
             onChange={setItemH}
             updateValidity={setIsValid}
+            data-testid="item-height"
           />
           <NumberInput
             label={"너비(mm)"}
             value={itemD}
             onChange={setItemD}
             updateValidity={setIsValid}
+            data-testid="item-depth"
           />
           <TextInput
             label={"아이템 이름"}
             value={itemTitle}
             onChange={setItemTitle}
+            data-testid="item-name"
           />
         </InputContainer>
         {!isValid && (
-          <ValidationMessageContainer>
+          <ValidationMessageContainer data-testid="validation-error-message">
             아이템 크기는 1mm 이상 400mm 이하여야 합니다.
           </ValidationMessageContainer>
         )}
         {isItemListFull && (
-          <ValidationMessageContainer>
+          <ValidationMessageContainer data-testid="limit-error-message">
             아이템은 최대 15개까지 추가할 수 있습니다.
           </ValidationMessageContainer>
         )}
@@ -156,6 +160,7 @@ function ItemInputField({
             onClick={registerItem}
             packing={true}
             disabled={!isValid || isItemListFull}
+            data-testid="add-button"
           />
         </ButtonsContainer>
       </ControlContainer>

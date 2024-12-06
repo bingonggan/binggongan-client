@@ -66,7 +66,10 @@ function ResultToolTip() {
   }
 
   return isResultToolTipOpen ? (
-    <ResultToolTipContainer onClick={handleModalClose}>
+    <ResultToolTipContainer
+      onClick={handleModalClose}
+      data-testid="result-tool-tip"
+    >
       <ResultModal
         onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) =>
           e.stopPropagation()
@@ -81,6 +84,7 @@ function ResultToolTip() {
             onClick={() => setIsResultToolTipOpen(false)}
             message={"확인"}
             packing={false}
+            data-testid="result-tooltip-confirm-button"
           />
         </ModalButtonContainer>
       </ResultModal>

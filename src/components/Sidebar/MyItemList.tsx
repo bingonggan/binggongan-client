@@ -77,7 +77,7 @@ function MyItemList({ itemList, changeItemList }: PropsType) {
   return (
     <>
       <TitleContainer>내 아이템</TitleContainer>
-      <ListContainer>
+      <ListContainer data-testid="my-item-list">
         {itemList.map((item, index) => {
           return isPacked ? (
             <PackedItemContainer
@@ -87,7 +87,7 @@ function MyItemList({ itemList, changeItemList }: PropsType) {
               {`${index + 1}. ${item.itemTitle}`}
             </PackedItemContainer>
           ) : (
-            <ItemContainer key={index}>
+            <ItemContainer key={index} data-testid={`my-item-${index}`}>
               <ItemExplainContainer>{`${index + 1}. ${item.itemTitle}`}</ItemExplainContainer>
               <Button
                 message={"삭제"}
@@ -97,6 +97,7 @@ function MyItemList({ itemList, changeItemList }: PropsType) {
                 hoverBackgroundColor={"#322e38"}
                 activeBackgroundColor={"#322e38"}
                 packing={false}
+                data-testid={`item-delete-button-${index}`}
               />
             </ItemContainer>
           );

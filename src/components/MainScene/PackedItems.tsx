@@ -49,7 +49,10 @@ function PackedItems() {
 
   return (
     <>
-      <Canvas camera={{ position: [7, 10, 5], fov: 100 }}>
+      <Canvas
+        camera={{ position: [7, 10, 5], fov: 100 }}
+        data-testid="packaging-result-canvas"
+      >
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} />
         {boxModelList &&
