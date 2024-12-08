@@ -7,8 +7,6 @@ node_modules
 #firebase hosting
 .firebaserc
 .firebase
-.github
-firebase.json
 
 # playwright
 /test-results/
