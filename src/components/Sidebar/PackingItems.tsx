@@ -48,7 +48,7 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_ORIGIN}/packing`,
+        `${import.meta.env.VITE_SERVER_ORIGIN}/api/packed-items`,
         {
           method: "POST",
           headers: {
