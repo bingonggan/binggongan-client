@@ -34,6 +34,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     if: success()
+    env:
+      VITE_ITEM_LIST: ${{ secrets.VITE_ITEM_LIST }}
+      VITE_ITEM_URL: ${{ secrets.VITE_ITEM_URL }}
+      VITE_PACKED_BOX_ITEM: ${{ secrets.VITE_PACKED_BOX_ITEM }}
+      VITE_BOX_ITEM: ${{ secrets.VITE_BOX_ITEM }}
+      VITE_SERVER_ORIGIN: ${{ secrets.VITE_SERVER_ORIGIN }}
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
