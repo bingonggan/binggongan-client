@@ -1,7 +1,7 @@
 import type { ItemModelType } from "../types";
 
 export default function calculateRotationType(
-  rotationType: number,
+  rotationType: 0 | 1 | 2 | 3 | 4 | 5,
 ): ItemModelType["rotation"] {
   const rotation = Math.PI / 2;
   switch (rotationType) {
