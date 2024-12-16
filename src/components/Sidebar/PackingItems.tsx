@@ -59,8 +59,14 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
       );
 
       if (!response.ok) {
-        const { detail } = await response.json();
-        throw new Error(detail);
+        if (response.status === 400) {
+          const { detail }: { detail: string } = await response.json();
+          throw new Error(detail);
+        }
+
+        throw new Error(
+          "예상치 못한 에러가 발생했습니다. 잠시 후 다시 시도해주세요.",
+        );
       }
 
       const jsonResponse = await response.json();
@@ -70,8 +76,7 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
       setIsPacked(true);
     } catch (error) {
       if (error instanceof Error) {
-        console.error(error.message);
-        toast("예상치 못한 에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        toast(error.message);
       }
     }
   }
