@@ -9,7 +9,7 @@ import {
   useSelectedIndexStore,
 } from "../../store";
 
-import type { CustomizedItem } from "../../types";
+import type { CustomizedItem, PackedBoxAndItem } from "../../types";
 
 const Container = styled.div`
   width: 100%;
@@ -17,7 +17,7 @@ const Container = styled.div`
 
 type PropsType = {
   itemList: CustomizedItem[];
-  changeItemList: React.Dispatch<React.SetStateAction<CustomizedItem[]>>;
+  changeItemList: (prop: CustomizedItem[]) => void;
 };
 
 function PackingItems({ itemList, changeItemList }: PropsType) {
@@ -69,7 +69,8 @@ function PackingItems({ itemList, changeItemList }: PropsType) {
         );
       }
 
-      const jsonResponse = await response.json();
+      const jsonResponse: { result: PackedBoxAndItem[] } =
+        await response.json();
       const packedBoxAndItemList = jsonResponse.result;
 
       setPackedBoxAndItemList(packedBoxAndItemList);
